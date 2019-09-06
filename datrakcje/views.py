@@ -31,3 +31,11 @@ class AboutView(View):
 class ContactView(View):
     def get(self, request):
         return TemplateResponse(request, 'contact.html')
+
+class BlogView(View):
+    def get(self, request):
+        return TemplateResponse(request, 'blog.html')
+
+class BlogSingleView(View):
+    def get(self, request):
+        return TemplateResponse(request, 'blog-single.html')
