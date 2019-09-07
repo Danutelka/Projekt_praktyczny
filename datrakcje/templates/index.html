@@ -6,7 +6,7 @@
 
 	{% block content %}
 	  
-    <div class="hero-wrap js-fullheight" style="background-image: url({% static '/images/bg2_header.jpg' %});">
+    <div class="hero-wrap js-fullheight" style="background-image: url({% static '/images/bg_index_temp2.jpg' %});">
       <div class="overlay"></div>
       <div class="container">
         <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-start" data-scrollax-parent="true">
@@ -123,26 +123,7 @@
 					              </div>
 				              </div>
               			</div>
-						{% comment %}
-              			<div class="col-md align-items-end">
-              				<div class="form-group">
-              					<label for="#">Liczba osób</label>
-              					<div class="form-field">
-	              					<div class="select-wrap">
-			                      <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-			                      <select name="" id="" class="form-control">
-			                      	<option value="">1</option>
-			                        <option value="">2-3</option>
-			                        <option value="">4-6</option>
-			                        <option value="">Więcej</option>
-			                        <!--<option value="">Cały dzień</option>-->
-			                      </select>
-			                    </div>
-					              </div>
-				              </div>
-              			</div>
-						{% endcomment %}
-              			<div class="col-md align-self-end">
+         			<div class="col-md align-self-end">
               				<div class="form-group">
               					<div class="form-field">
 					                <input type="submit" value="Search" class="form-control btn btn-primary">
@@ -165,46 +146,7 @@
 					              </div>
 				              </div>
               			</div>
-						{% comment %}
-              			<div class="col-md align-items-end">
-              				<div class="form-group">
-              					<label for="#">Check In</label>
-              					<div class="form-field">
-	              					<div class="icon"><span class="icon-map-marker"></span></div>
-					                <input type="text" class="form-control checkin_date" placeholder="Check In">
-					              </div>
-				              </div>
-              			</div> {% endcomment %}
-						{% comment %}
-              			<div class="col-md align-items-end">
-              				<div class="form-group">
-              					<label for="#">Przedział</label>
-              					<div class="form-field">
-	              					<div class="select-wrap">
-			                      <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-			                      <select name="" id="" class="form-control">
-			                      	<option value="">1</option>
-			                        <option value="">2</option>
-			                        <option value="">3</option>
-			                        <option value="">4</option>
-			                        <option value="">5</option>
-			                      </select>
-			                    </div>
-					              </div>
-				              </div>
-              			</div>
-						{% endcomment %}
-						{% comment %} 
-              			<div class="col-md align-items-end">
-              				<div class="form-group">
-              					<label for="#">Check Out</label>
-              					<div class="form-field">
-	              					<div class="icon"><span class="icon-map-marker"></span></div>
-					                <input type="text" class="form-control checkout_date" placeholder="From">
-					              </div>
-				              </div>
-              			</div> {% endcomment %}
-              			<div class="col-md align-self-end">
+         			<div class="col-md align-self-end">
               				<div class="form-group">
               					<div class="form-field">
 					                <input type="submit" value="Search" class="form-control btn btn-primary">
@@ -247,38 +189,7 @@
 
 <!-- -->
 
-    <section class="ftco-section">
-    	<div class="container">
-    		<div class="row justify-content-center mb-5 pb-3">
-          <div class="col-md-7 heading-section text-center ftco-animate">
-            <h2 class="mb-4">See our latest ideas</h2>
-          </div>
-        </div>
-        <div class="row">
-        	<div class="col-md-4 ftco-animate">
-        		<a href="#" class="destination-entry img" style="background-image: url({% static '/images/destination-1.jpg' %});">
-        			<div class="text text-center">
-        				<h3>Beachfront Scape</h3> 
-        			</div>
-        		</a>
-        	</div>
-        	<div class="col-md-4 ftco-animate">
-        		<a href="#" class="destination-entry img" style="background-image: url({% static '/images/destination-2-1.jpg' %});">
-        			<div class="text text-center">
-        				<h3>Group Holidays</h3>
-        			</div>
-        		</a>
-        	</div>
-        	<div class="col-md-4 ftco-animate">
-        		<a href="#" class="destination-entry img" style="background-image: url({% static '/images/destination-3.jpg' %});">
-        			<div class="text text-center">
-        				<h3>City Breaks</h3>
-        			</div>
-        		</a>
-        	</div>
-        </div>
-    	</div>
-    </section>
+
 <!-- -->	
 		<section class="ftco-about d-md-flex">
     	<div class="one-half img" style="background-image: url({% static '/images/about.jpg' %});"></div>
@@ -335,6 +246,39 @@
       </div>
     </section>
 <!---->  
+    <section class="ftco-section">
+    	<div class="container">
+    		<div class="row justify-content-center mb-5 pb-3">
+          <div class="col-md-7 heading-section text-center ftco-animate">
+            <h2 class="mb-4">See our latest ideas</h2>
+          </div>
+        </div>
+        <div class="row">
+        	<div class="col-md-4 ftco-animate">
+        		<a href="#" class="destination-entry img" style="background-image: url({% static '/images/destination-1.jpg' %});">
+        			<div class="text text-center">
+        				<h3>Beachfront Scape</h3> 
+        			</div>
+        		</a>
+        	</div>
+        	<div class="col-md-4 ftco-animate">
+        		<a href="#" class="destination-entry img" style="background-image: url({% static '/images/destination-2-1.jpg' %});">
+        			<div class="text text-center">
+        				<h3>Group Holidays</h3>
+        			</div>
+        		</a>
+        	</div>
+        	<div class="col-md-4 ftco-animate">
+        		<a href="#" class="destination-entry img" style="background-image: url({% static '/images/destination-3.jpg' %});">
+        			<div class="text text-center">
+        				<h3>City Breaks</h3>
+        			</div>
+        		</a>
+        	</div>
+        </div>
+    	</div>
+    </section>
+<!---->
     <section class="ftco-section">
     	<div class="container">
 				<div class="row justify-content-center mb-5 pb-3">
@@ -485,230 +429,7 @@
     	</div>
     </section>
 
-<!--
-    <section class="ftco-section ftco-counter img" id="section-counter" style="background-image: url({% static '/images/bg2_header.jpg' %});" data-stellar-background-ratio="0.5">
-    	<div class="container">
-    		<div class="row justify-content-center">
-    			<div class="col-md-10">
-		    		<div class="row">
-		          <div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
-		            <div class="block-18 text-center">
-		              <div class="text">
-		                <strong class="number" data-number="100000">0</strong>
-		                <span>Happy Customers</span>
-		              </div>
-		            </div>
-		          </div>
-		          <div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
-		            <div class="block-18 text-center">
-		              <div class="text">
-		                <strong class="number" data-number="40000">0</strong>
-		                <span>Destination Places</span>
-		              </div>
-		            </div>
-		          </div>
-		          <div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
-		            <div class="block-18 text-center">
-		              <div class="text">
-		                <strong class="number" data-number="87000">0</strong>
-		                <span>Hotels</span>
-		              </div>
-		            </div>
-		          </div>
-		          <div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
-		            <div class="block-18 text-center">
-		              <div class="text">
-		                <strong class="number" data-number="56400">0</strong>
-		                <span>Restaurant</span>
-		              </div>
-		            </div>
-		          </div>
-		        </div>
-	        </div>
-        </div>
-    	</div>
-    </section>
---> 
-<!--
-    <section class="ftco-section">
-    	<div class="container">
-				<div class="row justify-content-center mb-5 pb-3">
-          <div class="col-md-7 heading-section text-center ftco-animate">
-            <h2 class="mb-4"><strong>Popular</strong> Hotels</h2>
-          </div>
-        </div>    		
-    	</div>
-    	<div class="container-fluid">
-    		<div class="row">
-    			<div class="col-sm col-md-6 col-lg ftco-animate">
-    				<div class="destination">
-    					<a href="#" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url({% static '/images/hotel-1.jpg' %});">
-    						<div class="icon d-flex justify-content-center align-items-center">
-    							<span class="icon-link"></span>
-    						</div>
-    					</a>
-    					<div class="text p-3">
-    						<div class="d-flex">
-    							<div class="one">
-		    						<h3><a href="#">New Orleans, Hotel</a></h3>
-		    						<p class="rate">
-		    							<i class="icon-star"></i>
-		    							<i class="icon-star"></i>
-		    							<i class="icon-star"></i>
-		    							<i class="icon-star"></i>
-		    							<i class="icon-star-o"></i>
-		    							<span>8 Rating</span>
-		    						</p>
-	    						</div>
-	    						<div class="two">
-	    							<span class="price per-price">$40<br><small>/night</small></span>
-    							</div>
-    						</div>
-    						<p>Far far away, behind the word mountains, far from the countries</p>
-    						<hr>
-    						<p class="bottom-area d-flex">
-    							<span><i class="icon-map-o"></i> Miami, Fl</span> 
-    							<span class="ml-auto"><a href="#">Book Now</a></span>
-    						</p>
-    					</div>
-    				</div>
-    			</div>
-    			<div class="col-sm col-md-6 col-lg ftco-animate">
-    				<div class="destination d-md-flex flex-column-reverse">
-    					<a href="#" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url({% static '/images/hotel-2.jpg' %});">
-    						<div class="icon d-flex justify-content-center align-items-center">
-    							<span class="icon-link"></span>
-    						</div>
-    					</a>
-    					<div class="text p-3">
-    						<div class="d-flex">
-    							<div class="one">
-		    						<h3><a href="#">New Orleans, Hotel</a></h3>
-		    						<p class="rate">
-		    							<i class="icon-star"></i>
-		    							<i class="icon-star"></i>
-		    							<i class="icon-star"></i>
-		    							<i class="icon-star"></i>
-		    							<i class="icon-star-o"></i>
-		    							<span>8 Rating</span>
-		    						</p>
-	    						</div>
-	    						<div class="two">
-	    							<span class="price per-price">$40<br><small>/night</small></span>
-    							</div>
-    						</div>
-    						<p>Far far away, behind the word mountains, far from the countries</p>
-    						<hr>
-    						<p class="bottom-area d-flex">
-    							<span><i class="icon-map-o"></i> Miami, Fl</span> 
-    							<span class="ml-auto"><a href="#">Book Now</a></span>
-    						</p>
-    					</div>
-    				</div>
-    			</div>
-    			<div class="col-sm col-md-6 col-lg ftco-animate">
-    				<div class="destination">
-    					<a href="#" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url({% static '/images/hotel-3.jpg' %});">
-    						<div class="icon d-flex justify-content-center align-items-center">
-    							<span class="icon-link"></span>
-    						</div>
-    					</a>
-    					<div class="text p-3">
-    						<div class="d-flex">
-    							<div class="one">
-		    						<h3><a href="#">New Orleans, Hotel</a></h3>
-		    						<p class="rate">
-		    							<i class="icon-star"></i>
-		    							<i class="icon-star"></i>
-		    							<i class="icon-star"></i>
-		    							<i class="icon-star"></i>
-		    							<i class="icon-star-o"></i>
-		    							<span>8 Rating</span>
-		    						</p>
-	    						</div>
-	    						<div class="two">
-	    							<span class="price per-price">$40<br><small>/night</small></span>
-    							</div>
-    						</div>
-    						<p>Far far away, behind the word mountains, far from the countries</p>
-    						<hr>
-    						<p class="bottom-area d-flex">
-    							<span><i class="icon-map-o"></i> Miami, Fl</span> 
-    							<span class="ml-auto"><a href="#">Book Now</a></span>
-    						</p>
-    					</div>
-    				</div>
-    			</div>
-    			<div class="col-sm col-md-6 col-lg ftco-animate">
-    				<div class="destination d-md-flex flex-column-reverse">
-    					<a href="#" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url({% static '/images/hotel-4.jpg' %});">
-    						<div class="icon d-flex justify-content-center align-items-center">
-    							<span class="icon-link"></span>
-    						</div>
-    					</a>
-    					<div class="text p-3">
-    						<div class="d-flex">
-    							<div class="one">
-		    						<h3><a href="#">New Orleans, Hotel</a></h3>
-		    						<p class="rate">
-		    							<i class="icon-star"></i>
-		    							<i class="icon-star"></i>
-		    							<i class="icon-star"></i>
-		    							<i class="icon-star"></i>
-		    							<i class="icon-star-o"></i>
-		    							<span>8 Rating</span>
-		    						</p>
-	    						</div>
-	    						<div class="two">
-	    							<span class="price per-price">$40<br><small>/night</small></span>
-    							</div>
-    						</div>
-    						<p>Far far away, behind the word mountains, far from the countries</p>
-    						<hr>
-    						<p class="bottom-area d-flex">
-    							<span><i class="icon-map-o"></i> Miami, Fl</span> 
-    							<span class="ml-auto"><a href="#">Book Now</a></span>
-    						</p>
-    					</div>
-    				</div>
-    			</div>
-    			<div class="col-sm col-md-6 col-lg ftco-animate">
-    				<div class="destination">
-    					<a href="#" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url({% static '/images/hotel-5.jpg' %});">
-    						<div class="icon d-flex justify-content-center align-items-center">
-    							<span class="icon-link"></span>
-    						</div>
-    					</a>
-    					<div class="text p-3">
-    						<div class="d-flex">
-    							<div class="one">
-		    						<h3><a href="#">New Orleans, Hotel</a></h3>
-		    						<p class="rate">
-		    							<i class="icon-star"></i>
-		    							<i class="icon-star"></i>
-		    							<i class="icon-star"></i>
-		    							<i class="icon-star"></i>
-		    							<i class="icon-star-o"></i>
-		    							<span>8 Rating</span>
-		    						</p>
-	    						</div>
-	    						<div class="two">
-	    							<span class="price per-price">$40<br><small>/night</small></span>
-    							</div>
-    						</div>
-    						<p>Far far away, behind the word mountains, far from the countries</p>
-    						<hr>
-    						<p class="bottom-area d-flex">
-    							<span><i class="icon-map-o"></i> Miami, Fl</span> 
-    							<span class="ml-auto"><a href="#">Book Now</a></span>
-    						</p>
-    					</div>
-    				</div>
-    			</div>
-    		</div>
-    	</div>
-    </section>
--->
+
     <section class="ftco-section testimony-section">
       <div class="container">
         <div class="row justify-content-center mb-5 pb-3">
@@ -796,123 +517,7 @@
       </div>
     </section>
 
-<!--
-    <section class="ftco-section">
-    	<div class="container">
-				<div class="row justify-content-center mb-5 pb-3">
-          <div class="col-md-7 heading-section text-center ftco-animate">
-            <h2 class="mb-4">Recommended Restaurants</h2>
-          </div>
-        </div>    		
-    		<div class="row">
-    			<div class="col-md-6 col-lg-3 ftco-animate">
-    				<div class="destination">
-    					<a href="#" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url({% static '/images/restaurant-1.jpg' %});">
-    						<div class="icon d-flex justify-content-center align-items-center">
-    							<span class="icon-link"></span>
-    						</div>
-    					</a>
-    					<div class="text p-3">
-    						<h3><a href="#">Luxury Restaurant</a></h3>
-    						<p class="rate">
-    							<i class="icon-star"></i>
-    							<i class="icon-star"></i>
-    							<i class="icon-star"></i>
-    							<i class="icon-star"></i>
-    							<i class="icon-star-o"></i>
-    							<span>8 Rating</span>
-    						</p>
-    						<p>Far far away, behind the word mountains, far from the countries</p>
-    						<hr>
-    						<p class="bottom-area d-flex">
-    							<span><i class="icon-map-o"></i> San Franciso, CA</span> 
-    							<span class="ml-auto"><a href="#">Discover</a></span>
-    						</p>
-    					</div>
-    				</div>
-    			</div>
-    			<div class="col-md-6 col-lg-3 ftco-animate">
-    				<div class="destination d-md-flex flex-column-reverse">
-    					<a href="#" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url({% static '/images/restaurant-2.jpg' %});">
-    						<div class="icon d-flex justify-content-center align-items-center">
-    							<span class="icon-link"></span>
-    						</div>
-    					</a>
-    					<div class="text p-3">
-    						<h3><a href="#">Luxury Restaurant</a></h3>
-    						<p class="rate">
-    							<i class="icon-star"></i>
-    							<i class="icon-star"></i>
-    							<i class="icon-star"></i>
-    							<i class="icon-star"></i>
-    							<i class="icon-star-o"></i>
-    							<span>8 Rating</span>
-    						</p>
-    						<p>Far far away, behind the word mountains, far from the countries</p>
-    						<hr>
-    						<p class="bottom-area d-flex">
-    							<span><i class="icon-map-o"></i> San Franciso, CA</span> 
-    							<span class="ml-auto"><a href="#">Book Now</a></span>
-    						</p>
-    					</div>
-    				</div>
-    			</div>
-    			<div class="col-md-6 col-lg-3 ftco-animate">
-    				<div class="destination">
-    					<a href="#" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url({% static '/images/restaurant-3.jpg' %});">
-    						<div class="icon d-flex justify-content-center align-items-center">
-    							<span class="icon-link"></span>
-    						</div>
-    					</a>
-    					<div class="text p-3">
-    						<h3><a href="#">Luxury Restaurant</a></h3>
-    						<p class="rate">
-    							<i class="icon-star"></i>
-    							<i class="icon-star"></i>
-    							<i class="icon-star"></i>
-    							<i class="icon-star"></i>
-    							<i class="icon-star-o"></i>
-    							<span>8 Rating</span>
-    						</p>
-    						<p>Far far away, behind the word mountains, far from the countries</p>
-    						<hr>
-    						<p class="bottom-area d-flex">
-    							<span><i class="icon-map-o"></i> San Franciso, CA</span> 
-    							<span class="ml-auto"><a href="#">Book Now</a></span>
-    						</p>
-    					</div>
-    				</div>
-    			</div>
-    			<div class="col-md-6 col-lg-3 ftco-animate">
-    				<div class="destination d-md-flex flex-column-reverse">
-    					<a href="#" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url({% static '/images/restaurant-4.jpg' %});">
-    						<div class="icon d-flex justify-content-center align-items-center">
-    							<span class="icon-link"></span>
-    						</div>
-    					</a>
-    					<div class="text p-3">
-    						<h3><a href="#">Luxury Restaurant</a></h3>
-    						<p class="rate">
-    							<i class="icon-star"></i>
-    							<i class="icon-star"></i>
-    							<i class="icon-star"></i>
-    							<i class="icon-star"></i>
-    							<i class="icon-star-o"></i>
-    							<span>8 Rating</span>
-    						</p>
-    						<p>Far far away, behind the word mountains, far from the countries</p>
-    						<hr>
-    						<p class="bottom-area d-flex">
-    							<span><i class="icon-map-o"></i> San Franciso, CA</span> 
-    							<span class="ml-auto"><a href="#">Book Now</a></span>
-    						</p>
-    					</div>
-    				</div>
-    			</div>
-    		</div>
-    	</div>
-    </section>
--->
+
     <section class="ftco-section bg-light">
       <div class="container">
         <div class="row justify-content-center mb-5 pb-3">
@@ -970,26 +575,4 @@
       </div>
     </section>
 		
-	<section class="ftco-section-parallax">
-      <div class="parallax-img d-flex align-items-center">
-        <div class="container">
-          <div class="row d-flex justify-content-center">
-            <div class="col-md-7 text-center heading-section heading-section-white ftco-animate">
-              <h2>Subcribe to our Newsletter</h2>
-              <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in</p>
-              <div class="row d-flex justify-content-center mt-5">
-                <div class="col-md-8">
-                  <form action="#" class="subscribe-form">
-                    <div class="form-group d-flex">
-                      <input type="text" class="form-control" placeholder="Enter email address">
-                      <input type="submit" value="Subscribe" class="submit px-3">
-                    </div>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
   {% endblock %}

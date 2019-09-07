@@ -1,0 +1,337 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}atrakcja-single{% endblock %}
+
+  {% block content %}  
+   
+    <div class="hero-wrap js-fullheight" style="background-image: url({% static '/images/bg2_atrakcje.jpg' %});">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center" data-scrollax-parent="true">
+          <div class="col-md-9 text-center ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
+            <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Atrakcje</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<!-- bok start-->
+		<section class="ftco-section">
+      <div class="container">
+        <div class="row">
+        	<div class="col-lg-3 sidebar order-md-last ftco-animate">
+        		<div class="sidebar-wrap ftco-animate">
+        			<h3 class="heading mb-4">Search</h3>
+        			<form action="#">
+        				<div class="fields">
+		              <div class="form-group">
+		                <input type="text" class="form-control" placeholder="Destination, City">
+		              </div>
+		              <div class="form-group">
+		                <input type="text" id="checkin_date" class="form-control checkin_date" placeholder="Date from">
+		              </div>
+		              <div class="form-group">
+		                <input type="text" id="checkout_date" class="form-control checkout_date" placeholder="Date to">
+		              </div>
+						<div class="form-group">
+		                <div class="select-wrap one-third">
+	                    <div class="icon"><span class="ion-ios-arrow-down"></span></div>
+	                    <select name="" id="" class="form-control" placeholder="Liczba osób">
+	                      <option value="">Liczba osób</option>
+	                      <option value="">2-3</option>
+	                      <option value="">4-6</option>
+	                      <option value="">wiecej</option>
+	                    </select>
+	                  </div>
+		              </div>
+		              <div class="form-group">
+		                <input type="submit" value="Search" class="btn btn-primary py-3 px-5">
+		              </div>
+		            </div>
+	            </form>
+        		</div>
+        		<div class="sidebar-wrap ftco-animate">
+        			<h3 class="heading mb-4">Star Rating</h3>
+        			<form method="post" class="star-rating">
+							  <div class="form-check">
+									<input type="checkbox" class="form-check-input" id="exampleCheck1">
+									<label class="form-check-label" for="exampleCheck1">
+										<p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></span></p>
+									</label>
+							  </div>
+							  <div class="form-check">
+						      <input type="checkbox" class="form-check-input" id="exampleCheck1">
+						      <label class="form-check-label" for="exampleCheck1">
+						    	   <p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star-o"></i></span></p>
+						      </label>
+							  </div>
+							  <div class="form-check">
+						      <input type="checkbox" class="form-check-input" id="exampleCheck1">
+						      <label class="form-check-label" for="exampleCheck1">
+						      	<p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star-o"></i><i class="icon-star-o"></i></span></p>
+						     </label>
+							  </div>
+							  <div class="form-check">
+							    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+						      <label class="form-check-label" for="exampleCheck1">
+						      	<p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star-o"></i><i class="icon-star-o"></i><i class="icon-star-o"></i></span></p>
+						      </label>
+							  </div>
+							  <div class="form-check">
+						      <input type="checkbox" class="form-check-input" id="exampleCheck1">
+						      <label class="form-check-label" for="exampleCheck1">
+						      	<p class="rate"><span><i class="icon-star"></i><i class="icon-star-o"></i><i class="icon-star-o"></i><i class="icon-star-o"></i><i class="icon-star-o"></i></span></p>
+							    </label>
+							  </div>
+							</form>
+        		</div>
+          </div>
+<!-- do wywalenia stąd-->
+
+     <div class="col-lg-9">
+          	<div class="row">
+          		<div class="col-md-12 ftco-animate">
+          			<div class="single-slider owl-carousel">
+          				<div class="item">
+          					<div class="hotel-img" style="background-image: url({% static '/images/wodna_akademia1.jpg' %});"></div>
+          				</div>
+          				<div class="item">
+          					<div class="hotel-img" style="background-image: url({% static '/images/wodna_akademia2.jpg' %});"></div>
+          				</div>
+          				<div class="item">
+          					<div class="hotel-img" style="background-image: url({% static '/images/wodna_akademia3.jpg' %});"></div>
+          				</div>
+          			</div>
+          		</div>
+          		<div class="col-md-12 hotel-single mt-4 mb-5 ftco-animate">
+          			<span>Nauka i rozrywka</span>
+          			<h2>Wodna Akademia w Parku Wodnym w Tychach</h2>
+          			<p class="rate mb-5">
+          				<span class="loc"><a href="#"><i class="icon-map"></i> Sikorskiego 20, 43-100 Tychy </a></span>
+          				<span class="star">
+    							<i class="icon-star"></i>
+    							<i class="icon-star"></i>
+    							<i class="icon-star"></i>
+    							<i class="icon-star"></i>
+    							<i class="icon-star-o"></i>
+    							<span>Ocena</span>
+    						</p>
+    						<p> Motywem przewodnim jest szeroko rozumiany żywioł wody. Multimedialne stanowiska pozwalają obcować z nauką i wiedzą na wiele różnych sposobów. Wodna Akademia to kraina wiedzy, która pozwoli znaleźć odpowiedzi na nurtujące pytania i z pewnością zachwyci każdego odwiedzającego.</p>
+    						<div class="d-md-flex mt-5 mb-5">
+    							<ul>
+	    							<li>ile osob</li>
+	    							<li>cena</li>
+	    							<li>czas</li>
+	    							<li>ocena</li>
+	    						</ul>
+	    						<ul class="ml-md-5">
+	    							<li>dane wlasciciela</li>
+	    							<li>wiadomosc</li>
+	    							<li>zarezerwuj</li>
+	    							<li>www</li>
+	    						</ul>
+    						</div>
+    						<p>Rozbudza ciekawość otaczającego nas świata. Przestrzeń o funkcji przede wszystkim edukacyjnej i poznawczej. Nie zabrakło tu również elementów rozrywkowych, które uczą przez dobrą zabawę. Strefa Edukacyjna podzielona jest na pięć zróżnicowanych scenograficznie stref tematycznych, układających się w spójną trasę.</p>
+          		</div>
+			
+          		<div class="col-md-12 hotel-single ftco-animate mb-5 mt-4">
+          			<h4 class="mb-4">Our Atractions</h4>
+          			<div class="row">
+          				<div class="col-md-4">
+				    				<div class="destination">
+				    					<a href="hotel-single.html" class="img img-2" style="background-image: url({% static '/images/wodna_akademia1.jpg'%});"></a>
+				    					<div class="text p-3">
+				    						<div class="d-flex">
+				    							<div class="one">
+						    						<h3><a href="hotel-single.html">Batyskaf</a></h3>
+					    						</div>
+					    						<!--
+												<div class="two">
+					    							<span class="price per-price">$40<br><small>/night</small></span>
+				    							</div>
+												-->
+				    						</div>
+				    						<p>Batyskaf to ogromne stanowisko na wystawie wyposażone w peryskop</p>
+				    						<hr>
+				    						<!--
+											<p class="bottom-area d-flex">
+				    							<span><i class="icon-map-o"></i> Miami, Fl</span> 
+				    							<span class="ml-auto"><a href="#">Book Now</a></span>
+				    						</p> -->
+				    					</div>
+				    				</div>
+				    			</div>
+				    			<div class="col-md-4">
+				    				<div class="destination">
+				    					<a href="hotel-single.html" class="img img-2" style="background-image: url({% static '/images/wodna_akademia2.jpg' %});"></a>
+				    					<div class="text p-3">
+				    						<div class="d-flex">
+				    							<div class="one">
+						    						<h3><a href="hotel-single.html">Śruba Archimedesa</a></h3>
+					    						</div>
+				    						</div>
+				    						<p>Zobacz i wypróbuj jak działa śruba Archimedesa</p>
+				    						<hr>
+				    					</div>
+				    				</div>
+				    			</div>
+				    			<div class="col-md-4">
+				    				<div class="destination">
+				    					<a href="hotel-single.html" class="img img-2" style="background-image: url({% static '/images/wodna_akademia3.jpg' %});"></a>
+				    					<div class="text p-3">
+				    						<div class="d-flex">
+				    							<div class="one">
+						    						<h3><a href="hotel-single.html">Zmienna rzeka</a></h3>
+					    						</div>
+				    						</div>
+				    						<p>Sam swtórz góry i zobacz jak będą się zachowywać w starciu z wodą</p>
+				    						<hr>
+				    					</div>
+				    				</div>
+				    			</div>
+          			</div>
+          		</div>
+          		<div class="col-md-12 hotel-single ftco-animate mb-5 mt-4">
+          			<h4 class="mb-5">Check Availability &amp; Booking</h4>
+          			<div class="fields">
+          				<div class="row">
+          					<div class="col-md-6">
+				              <div class="form-group">
+				                <input type="text" class="form-control" placeholder="Name">
+				              </div>
+			              </div>
+			              <div class="col-md-6">
+				              <div class="form-group">
+				                <input type="text" class="form-control" placeholder="Email">
+				              </div>
+			              </div>
+			              <div class="col-md-6">
+				              <div class="form-group">
+				                <input type="text" class="form-control checkin_date" placeholder="Date from">
+				              </div>
+			              </div>
+			              <div class="col-md-6">
+				              <div class="form-group">
+				                <input type="text" class="form-control checkout_date" placeholder="Date to">
+				              </div>
+				            </div>
+				            <div class="col-md-6">
+					            <div class="form-group">
+				                <div class="select-wrap one-third">
+			                    <div class="icon"><span class="ion-ios-arrow-down"></span></div>
+			                    <select name="" id="" class="form-control" placeholder="Guest">
+			                      <option value="0">Ilość osób</option>
+			                      <option value="1">1</option>
+			                      <option value="2">2</option>
+			                      <option value="3">3</option>
+			                      <option value="4">4</option>
+			                    </select>
+			                  </div>
+				              </div>
+			              </div>
+			              <div class="col-md-6">
+					            <div class="form-group">
+				                <div class="select-wrap one-third">
+			                    <div class="icon"><span class="ion-ios-arrow-down"></span></div>
+			                    <select name="" id="" class="form-control" placeholder="Children">
+			                      <option value="0">Przedział wiekowy</option>
+			                      <option value="1">0-2</option>
+			                      <option value="2">3-5</option>
+			                      <option value="3">6-10</option>
+			                      <option value="4">wiecej</option>
+			                    </select>
+			                  </div>
+				              </div>
+			              </div>
+				            <div class="col-md-12">
+				              <div class="form-group">
+				                <input type="submit" value="Check Availability" class="btn btn-primary py-3">
+				              </div>
+			              </div>
+		              </div>
+		            </div>
+          		</div>
+          		
+          		<div class="col-md-12 hotel-single ftco-animate mb-5 mt-5">
+          			<h4 class="mb-4">Related Places</h4>
+          			<div class="row">
+          				<div class="col-md-4">
+				    				<div class="destination">
+				    					<a href="hotel-single.html" class="img img-2" style="background-image: url({% static '/images/disneyland.jpg' %});"></a>
+				    					<div class="text p-3">
+				    						<div class="d-flex">
+				    							<div class="one">
+						    						<h3><a href="hotel-single.html">Disneyland</a></h3>
+						    						<p class="rate">
+						    							<i class="icon-star"></i>
+						    							<i class="icon-star"></i>
+						    							<i class="icon-star"></i>
+						    							<i class="icon-star"></i>
+						    							<i class="icon-star-o"></i>
+						    							<span>ocena</span>
+						    						</p>
+					    						</div>
+					    		
+				    						</div>
+				    						<p>Far far away, behind the word mountains, far away near Paris</p>
+				    						<hr>
+				    					</div>
+				    				</div>
+				    			</div>
+				    			<div class="col-md-4">
+				    				<div class="destination">
+				    					<a href="hotel-single.html" class="img img-2" style="background-image: url({% static '/images/energylandia.jpg' %});"></a>
+				    					<div class="text p-3">
+				    						<div class="d-flex">
+				    							<div class="one">
+						    						<h3><a href="hotel-single.html">Energylandia</a></h3>
+						    						<p class="rate">
+						    							<i class="icon-star"></i>
+						    							<i class="icon-star"></i>
+						    							<i class="icon-star"></i>
+						    							<i class="icon-star"></i>
+						    							<i class="icon-star-o"></i>
+						    							<span>ocena</span>
+						    						</p>
+					    						</div>
+				    						</div>
+				    						<p>Far far away, behind the word mountains, far from Kraków</p>
+				    						<hr>
+				    					</div>
+				    				</div>
+				    			</div>
+				    			<div class="col-md-4">
+				    				<div class="destination">
+				    					<a href="hotel-single.html" class="img img-2" style="background-image: url({% static '/images/rabkoland.jpg' %});"></a>
+				    					<div class="text p-3">
+				    						<div class="d-flex">
+				    							<div class="one">
+						    						<h3><a href="hotel-single.html">Rabkoland</a></h3>
+						    						<p class="rate">
+						    							<i class="icon-star"></i>
+						    							<i class="icon-star"></i>
+						    							<i class="icon-star"></i>
+						    							<i class="icon-star"></i>
+						    							<i class="icon-star-o"></i>
+						    							<span>ocena</span>
+						    						</p>
+					    						</div>
+				    						</div>
+				    						<p>Far far away, not far from Krakow</p>
+				    						<hr>
+				    						</p>
+				    					</div>
+				    				</div>
+				    			</div>
+          			</div>
+          		</div>
+
+          	</div>
+          </div> <!-- .col-md-8 -->
+        </div>
+      </div>
+    </section> 
+<!-- .section -->
+
+{% endblock %}

@@ -39,3 +39,19 @@ class BlogView(View):
 class BlogSingleView(View):
     def get(self, request):
         return TemplateResponse(request, 'blog-single.html')
+
+class AtrakcjeView(View):
+    def get(self, request):
+        return TemplateResponse(request, 'atrakcje.html')
+
+class AtrakcjeSingleView(View):
+    def get(self, request):
+        return TemplateResponse(request, 'atrakcje-single.html')
+
+class AnimacjeView(View):
+    def get(self, request):
+        return TemplateResponse(request, 'animacje.html')
+
+class AnimacjeSingleView(View):
+    def get(self, request):
+        return TemplateResponse(request, 'animacje-single.html')

@@ -17,7 +17,8 @@ from django.contrib import admin
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
-from datrakcje.views import StartView, AboutView, BaseView, ContactView, BlogView, BlogSingleView
+from datrakcje.views import StartView, AboutView, BaseView, ContactView, BlogView, BlogSingleView,  \
+    AtrakcjeView, AtrakcjeSingleView, AnimacjeView, AnimacjeSingleView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,5 +27,9 @@ urlpatterns = [
     path('about', AboutView.as_view(), name="about"),
     path('contact', ContactView.as_view(), name="contact"),
     path('blog', BlogView.as_view(), name="blog"),
-    path('blog/single', BlogSingleView.as_view(), name="blog-single")
+    path('blog/single', BlogSingleView.as_view(), name="blog-single"),
+    path('atrakcje', AtrakcjeView.as_view(), name="atrakcje"),
+    path('atrakcje/single', AtrakcjeSingleView.as_view(), name="atrakcje-single"),
+    path('animacje', AnimacjeView.as_view(), name="animacje"),
+    path('animacje/single', AnimacjeSingleView.as_view(), name="animacje-single")
 ]
