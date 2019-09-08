@@ -24,3 +24,4 @@ traitlets==4.3.2
 wcwidth==0.1.7
 Werkzeug==0.15.2
 django-bootstrap-static==4.0.0
+Pillow==6.1.0

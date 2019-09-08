@@ -15,7 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf.urls import url
 from django.conf import settings
+from django.views.static import serve
 from django.conf.urls.static import static
 from datrakcje.views import StartView, AboutView, BaseView, ContactView, BlogView, BlogSingleView,  \
     AtrakcjeView, AtrakcjeSingleView, AnimacjeView, AnimacjeSingleView
@@ -32,4 +34,4 @@ urlpatterns = [
     path('atrakcje/single', AtrakcjeSingleView.as_view(), name="atrakcje-single"),
     path('animacje', AnimacjeView.as_view(), name="animacje"),
     path('animacje/single', AnimacjeSingleView.as_view(), name="animacje-single")
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
