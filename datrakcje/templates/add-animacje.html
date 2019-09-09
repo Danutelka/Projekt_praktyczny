@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}add-animacje{% endblock %}
+
+{% block content %}
+    <form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="dodaj animacje">
+    </form>
+{% endblock %}

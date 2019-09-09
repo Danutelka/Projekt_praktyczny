@@ -14,6 +14,8 @@ from django.contrib.auth.models import Permission
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.conf.urls.static import static
+from .models import Attraction, Animation, PEOPLE, AGE, DURATION, TAGS_ANIM, TAGS_ATTR, ZAKRES
+from .forms import AddAtractionForm, AddAnimationForm
 # Create your views here.
 
 class BaseView(View):
@@ -48,6 +50,11 @@ class AtrakcjeSingleView(View):
     def get(self, request):
         return TemplateResponse(request, 'atrakcje-single.html')
 
+class AddAtrakcjeView(View):
+    def get(self, request):
+        form = AddAtractionForm()
+        return TemplateResponse(request, 'add-atrakcje.html', context={'form':form})
+
 class AnimacjeView(View):
     def get(self, request):
         return TemplateResponse(request, 'animacje.html')
@@ -55,3 +62,8 @@ class AnimacjeView(View):
 class AnimacjeSingleView(View):
     def get(self, request):
         return TemplateResponse(request, 'animacje-single.html')
+
+class AddAnimacjeView(View):
+    def get(self, request):
+        form = AddAnimationForm()
+        return TemplateResponse(request, 'add-animacje.html', context={'form':form})

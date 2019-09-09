@@ -20,7 +20,8 @@ from django.conf import settings
 from django.views.static import serve
 from django.conf.urls.static import static
 from datrakcje.views import StartView, AboutView, BaseView, ContactView, BlogView, BlogSingleView,  \
-    AtrakcjeView, AtrakcjeSingleView, AnimacjeView, AnimacjeSingleView
+    AtrakcjeView, AtrakcjeSingleView, AnimacjeView, AnimacjeSingleView, AddAtrakcjeView,  \
+    AddAnimacjeView  
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -32,6 +33,8 @@ urlpatterns = [
     path('blog/single', BlogSingleView.as_view(), name="blog-single"),
     path('atrakcje', AtrakcjeView.as_view(), name="atrakcje"),
     path('atrakcje/single', AtrakcjeSingleView.as_view(), name="atrakcje-single"),
+    path('atrakcje/add', AddAtrakcjeView.as_view(), name="add-atrakcje"),
     path('animacje', AnimacjeView.as_view(), name="animacje"),
-    path('animacje/single', AnimacjeSingleView.as_view(), name="animacje-single")
+    path('animacje/single', AnimacjeSingleView.as_view(), name="animacje-single"),
+    path('animacje/add', AddAnimacjeView.as_view(), name="add-animacje")
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
