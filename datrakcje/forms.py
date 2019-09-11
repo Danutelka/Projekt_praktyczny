@@ -15,7 +15,7 @@ class AddAtractionForm(forms.Form):
     description = forms.CharField(widget=forms.Textarea(), label="opisz swoje usługi")
     rules = forms.CharField(widget=forms.Textarea(), label="opisz zasady i regulamin")
     votes = forms.IntegerField(widget=forms.HiddenInput, initial=0)
-    attr_tag = forms.MultipleChoiceField(widget=forms.RadioSelect, choices=TAGS_ATTR, label="Wybierz tagi")
+    attr_tag = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple, choices=TAGS_ATTR, label="Wybierz tagi")
     attr_foto1 = forms.ImageField(label="Dodaj foto 1:", help_text="możesz to zrobić później", required=False)
     attr_foto2 = forms.ImageField(label="Dodaj foto 2:", help_text="możesz to zrobić później", required=False)
     attr_foto3 = forms.ImageField(label="Dodaj foto 3:", help_text="możesz to zrobić później", required=False)
