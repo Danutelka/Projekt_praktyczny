@@ -9468,3 +9468,20 @@ textarea.form-control {
   font-size: 12px !important;
   width: 280px !important;
 }
+
+.body {
+  padding-top: 180px !important;
+}
+
+.ftco2-section-parallax {
+  position: relative; }
+  .ftco2-section-parallax .parallax-img {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    position: relative;
+    padding: 6em 0;
+    background: #fff;
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#08c29a', endColorstr='#16ddb2', GradientType=1 ); }
+  .ftco2-section-parallax .heading-section-white h2 {
+    font-weight: 400 !important; }

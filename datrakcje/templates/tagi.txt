@@ -1,0 +1,44 @@
+
+TAGS_ANIM = (
+    (0, "Wata cukrowa"),
+    (1, "Balony z helem"),
+    (2, "Żywe maskotki"),
+    (3, "Tematyczne"),
+    (4, "Teatr"),
+    (5, "Wypożyczalnia"),
+    (6, "Balonowe Zoo"),
+    (7, "Konkursy"),
+    (8, "Kreatywne zabawy"),
+    (9, "Świat baniek"),
+    (10, "Zabawy ruchowe"),
+    (11, "Sport"),
+    (12, "Zagadki"),
+    (13, "Gry"),
+    (14, "Piniata"),
+    (15, "Nietypowe"),
+    (16, "Przyjazne niepełnosprawnym"),
+    (17, "Dostępne po angielsku")
+)
+
+
+TAGS_ATTR = (
+    (0, "Wystawa"),
+    (1, "Centrum Nauki"),
+    (2, "Park"),
+    (3, "Park Rozrywki"),
+    (4, "Park Linowy"),
+    (5, "Park Miniatur"),
+    (6, "Ogród"), 
+    (7, "Centrum Zabaw"),
+    (8, "Zoo"),
+    (9, "Plac zabaw"),
+    (10, "Wodny Plac zabaw"),
+    (11, "AguaPark"),
+    (12, "Tor saneczkowy"),
+    (13, "Farma"),
+    (14, "Sport"),
+    (15, "Event"),
+    (16, "Nietypowe"),
+    (17, "Przyjazne niepełnosprawnym"),
+    (18, "Dostępne po angielsku")
+)

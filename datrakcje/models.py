@@ -6,7 +6,7 @@ PEOPLE = (
     (0, "1"),
     (1, "2-4"),
     (2, "5-8"),
-    (3, "więcej")
+    (3, "więcej niż 8")
 ) 
 
 AGE = (
@@ -14,7 +14,7 @@ AGE = (
     (1, "3-5"),
     (2, "6-10"),
     (3, "11-13"),
-    (4, "więcej")
+    (4, "więcej niz 13")
 )
 
 DURATION = (
@@ -23,49 +23,6 @@ DURATION = (
     (2, "kilka godzin"),
     (3, "cały dzień"),
     (4, "nieokreślony")
-)
-
-TAGS_ATTR = (
-    (0, "Wystawa"),
-    (1, "Centrum Nauki"),
-    (2, "Park"),
-    (3, "Park Rozrywki"),
-    (4, "Park Linowy"),
-    (5, "Park Miniatur"),
-    (6, "Ogród"), 
-    (7, "Centrum Zabaw"),
-    (8, "Zoo"),
-    (9, "Plac zabaw"),
-    (10, "Wodny Plac zabaw"),
-    (11, "AguaPark"),
-    (12, "Tor sanezckowy"),
-    (13, "Farma"),
-    (14, "Sport"),
-    (15, "Event"),
-    (16, "Nietypowe"),
-    (17, "Przyjazne niepełnosprawnym"),
-    (18, "Dostępne po angielsku")
-)
-
-TAGS_ANIM = (
-    (0, "Wata cukrowa"),
-    (1, "Balony z helem"),
-    (2, "Żywe maskotki"),
-    (3, "Tematyczne"),
-    (4, "Teatr"),
-    (5, "Wypożyczalnia"),
-    (6, "Balonowe Zoo"),
-    (7, "Konkursy"),
-    (8, "Kreatywne zabawy"),
-    (9, "Świat baniek"),
-    (10, "Zabawy ruchowe"),
-    (11, "Sport"),
-    (12, "Zagadki"),
-    (13, "Gry"),
-    (14, "Piniata"),
-    (15, "Nietypowe"),
-    (16, "Przyjazne niepełnosprawnym"),
-    (17, "Dostępne po angielsku")
 )
 
 ZAKRES =(
@@ -88,6 +45,29 @@ ZAKRES =(
     (16, "zachodniopomorskie"),
     (17, "cały kraj")
 )
+
+class AttrTag(models.Model):
+    attr_tag = models.CharField(max_length=128)
+
+    def __str__(self):
+        return "{}" .format(self.attr_tag)
+
+
+class AnimTag(models.Model):
+    anim_tag = models.CharField(max_length=128)
+
+    def __str__(self):
+        return "{}" .format(self.anim_tag)
+
+class GeneralFoto(models.Model):
+    title = models.CharField(max_length=32, blank=True, null=True, default="title")
+    foto = models.FileField(upload_to="media/general")
+
+class Wabik(models.Model):
+    wabik_foto = models.ImageField(upload_to = "media/wabik/", blank=True, null=True)
+    wabik_title = models.CharField(max_length=32, blank=True, null=True)
+    wabik_info = models.CharField(max_length=150, blank=True, null=True)
+
 class Attraction(models.Model):
     attr_name = models.CharField(max_length=128)
     address = models.CharField(max_length=64)
@@ -96,23 +76,13 @@ class Attraction(models.Model):
     description = models.TextField()
     rules = models.TextField()
     votes = models.IntegerField(blank=True, null=True)
-    attr_tag = models.IntegerField(choices=TAGS_ATTR)
-    attr_foto1 = models.ImageField(upload_to = "media/attr/", blank=True, null=True)
-    attr_foto2 = models.ImageField(upload_to = "media/attr/", blank=True, null=True)
-    attr_foto3 = models.ImageField(upload_to = "media/attr/", blank=True, null=True)
+    attr_tags = models.ManyToManyField(AttrTag)
+    attr_foto = models.ManyToManyField(GeneralFoto)
     attr_people = models.IntegerField(choices=PEOPLE)
     attr_price = models.CharField(max_length=24)
     attr_duration = models.IntegerField(choices=DURATION)
-    attr_www = models.CharField(max_length=32)
-    attr1_foto = models.ImageField(upload_to="media/attr/", blank=True, null=True)
-    attr1_title = models.CharField(max_length=32, blank=True, null=True)
-    attr1_info = models.CharField(max_length=150, blank=True, null=True)
-    attr2_foto = models.ImageField(upload_to="media/attr/", blank=True, null=True)
-    attr2_title = models.CharField(max_length=32, blank=True, null=True)
-    attr2_info = models.CharField(max_length=150, blank=True, null=True)
-    attr3_foto = models.ImageField(upload_to="media/attr/", blank=True, null=True)
-    attr3_title = models.CharField(max_length=32, blank=True, null=True)
-    attr3_info = models.CharField(max_length=150, blank=True, null=True)
+    attr_www = models.CharField(max_length=128)
+    attr_wabik = models.ManyToManyField(Wabik)
 
     class Meta:
         verbose_name = "Atrakcja"
@@ -130,24 +100,13 @@ class Animation(models.Model):
     description = models.TextField()
     rules = models.TextField()
     votes = models.IntegerField(blank=True, null=True)
-    anim_tag = models.IntegerField(choices=TAGS_ANIM)
-    anim_foto1 = models.ImageField(upload_to = "media/anim/", blank=True, null=True)
-    anim_foto2 = models.ImageField(upload_to = "media/anim/", blank=True, null=True)
-    anim_foto3 = models.ImageField(upload_to = "media/anim/", blank=True, null=True)
+    anim_tags = models.ManyToManyField(AnimTag)
+    anim_foto = models.ManyToManyField(GeneralFoto)
     anim_people = models.IntegerField(choices=PEOPLE)
     anim_price = models.CharField(max_length=24)
     anim_duration = models.IntegerField(choices=DURATION)
-    anim_www = models.CharField(max_length=32)
-    anim1_foto = models.ImageField(upload_to="media/anim/", blank=True, null=True)
-    anim1_title = models.CharField(max_length=32, blank=True, null=True)
-    anim1_info = models.CharField(max_length=150, blank=True, null=True)
-    anim2_foto = models.ImageField(upload_to="media/anim/", blank=True, null=True)
-    anim2_title = models.CharField(max_length=32, blank=True, null=True)
-    anim2_info = models.CharField(max_length=150, blank=True, null=True)
-    anim3_foto = models.ImageField(upload_to="media/anim/", blank=True, null=True)
-    anim3_title = models.CharField(max_length=32, blank=True, null=True)
-    anim1_info = models.CharField(max_length=150, blank=True, null=True)
-
+    anim_www = models.CharField(max_length=128)
+    anim_wabik = models.ManyToManyField(Wabik)
 
     class Meta:
         verbose_name = "Animacja"

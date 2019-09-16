@@ -103,12 +103,12 @@
           					<div class="hotel-img" style="background-image: url({% static '/images/wodna_akademia3.jpg' %});"></div>
           				</div>
           			</div>
-          		</div>
+          		</div> 
           		<div class="col-md-12 hotel-single mt-4 mb-5 ftco-animate">
-          			<span>Nauka i rozrywka</span>
-          			<h2>Wodna Akademia w Parku Wodnym w Tychach</h2>
+          			<span>{{ attr_single.attr_tags }}</span>
+          			<h2>{{ attr_single.attr_name }}</h2>
           			<p class="rate mb-5">
-          				<span class="loc"><a href="#"><i class="icon-map"></i> Sikorskiego 20, 43-100 Tychy </a></span>
+          				<span class="loc"><a href="#"><i class="icon-map"></i> {{attr_single.address}} </a></span>
           				<span class="star">
     							<i class="icon-star"></i>
     							<i class="icon-star"></i>
@@ -117,20 +117,20 @@
     							<i class="icon-star-o"></i>
     							<span>Ocena</span>
     						</p>
-    						<p> Motywem przewodnim jest szeroko rozumiany żywioł wody. Multimedialne stanowiska pozwalają obcować z nauką i wiedzą na wiele różnych sposobów. Wodna Akademia to kraina wiedzy, która pozwoli znaleźć odpowiedzi na nurtujące pytania i z pewnością zachwyci każdego odwiedzającego.</p>
+    						<p> {{ attr_single.description }}</p>
     						<div class="d-md-flex mt-5 mb-5">
     							<ul>
-	    							<li>ile osob</li>
-	    							<li>cena</li>
-	    							<li>czas</li>
+	    							<li><strong>Dla ilu osób:</strong> {{ attr_single.attr_people }}</li>
+	    							<li><b>Cena:</b> {{ attr_single.attr_price }}</li>
+	    							<li><b>Czas trwania:</b> {{ attr_single.attr_duration }}</li>
 	    						</ul>
 	    						<ul class="ml-md-5">
 	    							<li>wiadomosc</li>
 	    							<li>zarezerwuj</li>
-	    							<li>www</li>
+	    							<li><b>Strona www:</b> <a href="">{{ attr_single.attr_www }}</a> </li>
 	    						</ul>
     						</div>
-    						<p>Rozbudza ciekawość otaczającego nas świata. Przestrzeń o funkcji przede wszystkim edukacyjnej i poznawczej. Nie zabrakło tu również elementów rozrywkowych, które uczą przez dobrą zabawę. Strefa Edukacyjna podzielona jest na pięć zróżnicowanych scenograficznie stref tematycznych, układających się w spójną trasę.</p>
+    						<p>{{ attr_single.rules }}</p>
           		</div>
 			
           		<div class="col-md-12 hotel-single ftco-animate mb-5 mt-4">

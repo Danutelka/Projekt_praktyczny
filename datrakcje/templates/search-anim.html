@@ -1,0 +1,31 @@
+{% extends  'base.html'%}
+
+{% block content %}
+    <form method="POST">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="szukaj">
+    </form>
+    {% if product is not None%}
+        {% if product.count > 0 %}
+            <ul>
+                {% for s in product %}
+                <li>{{ s.name }} {{ s.price }} {{ s.description }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p> Nie znaleziono dopasowań w produktach</p>
+        {% endif %}
+    {% endif %}
+    {% if category is not None%}
+        {% if category.count > 0 %}
+            <ul>
+                {% for s in category %}
+                <li>{{ s.category_name }} {{ s.slug }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p> Nie znaleziono dopasowań w kategoriach</p>
+        {% endif %}
+    {% endif %}
+{% endblock %}

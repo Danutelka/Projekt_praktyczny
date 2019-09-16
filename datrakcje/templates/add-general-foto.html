@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}add-general-foto{% endblock %}
+
+{% block content %}
+    <div class="hero-wrap js-fullheight" style="background-image: url({% static '/images/bg_foto.jpg' %});">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center" data-scrollax-parent="true">
+          <div class="col-md-9 text-center ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
+            <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Dodaj zdjęcie</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section class="ftco2-section-parallax">
+      <div class="parallax-img d-flex align-items-center">
+        <div class="container">
+          <div class="row d-flex justify-content-center">
+            <form method="POST", enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                {{ form.import_file}}
+              <div class="row d-flex justify-content-center">
+              <input type="submit" value="dodaj zdjęcie">
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+{% endblock %}
