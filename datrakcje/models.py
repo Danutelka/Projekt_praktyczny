@@ -1,4 +1,5 @@
 from django.db import models
+from newsletter_subscription.models import SubscriptionBase
 
 # Create your models here.
 
@@ -95,7 +96,7 @@ class Animation(models.Model):
     anim_name = models.CharField(max_length=128)
     address = models.CharField(max_length=64)
     zakres = models.IntegerField(choices=ZAKRES)
-    anim_rating = models.IntegerField()
+    anim_rating = models.IntegerField(blank=True, null=True)
     created = models.DateField(auto_now_add=True)
     description = models.TextField()
     rules = models.TextField()
@@ -114,3 +115,12 @@ class Animation(models.Model):
 
     def __str__(self):
         return "{}" .format(self.anim_name)
+
+
+class Newsletter(models.Model):
+    email = models.EmailField(max_length=150, unique=True)
+    is_active = models.BooleanField(default=False)
+
+    def __str__(self):
+        return "{}" .format(self.email)
+     

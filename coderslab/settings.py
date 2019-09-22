@@ -59,6 +59,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    #'newsletter.middleware.GetRefererMiddleware',
 ]
 
 ROOT_URLCONF = 'coderslab.urls'
@@ -156,3 +157,5 @@ DATETIME_FORMAT = "Y-m-d H:M:S"
 USE_L10N = True
 USE_TZ = True
 TIME_ZONE = 'Poland'
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

@@ -15,25 +15,32 @@
         </div>
       </div>
     </div>
+
 <!--szukacz-->
 		<section class="ftco-section">
       <div class="container">
         <div class="row">
         	<div class="col-lg-3 sidebar order-md-last ftco-animate">
         		<div class="sidebar-wrap ftco-animate">
-        			<h3 class="heading mb-4">Search</h3>
+        			<h3 class="heading mb-4">Szukaj</h3>
         			<form action="#">
         				<div class="fields">
 		              <div class="form-group">
-		                <input type="text" class="form-control" placeholder="Destination, City">
+		                <input type="text" class="form-control" placeholder="atrakcje">
 		              </div>
-		              <div class="form-group">
+		              <!--<div class="form-group">
 		                <input type="text" id="checkin_date" class="form-control checkin_date" placeholder="Date from">
 		              </div>
 		              <div class="form-group">
 		                <input type="text" id="checkout_date" class="form-control checkout_date" placeholder="Date to">
+		              </div>-->
+                  <div class="form-group">
+		                <input type="text" class="form-control" placeholder="animacje">
 		              </div>
-						<div class="form-group">
+                  <div class="form-group">
+		                <input type="text" class="form-control" placeholder="miejsowość">
+		              </div>
+						<!--<div class="form-group">
 		                <div class="select-wrap one-third">
 	                    <div class="icon"><span class="ion-ios-arrow-down"></span></div>
 	                    <select name="" id="" class="form-control" placeholder="Liczba osób">
@@ -43,7 +50,7 @@
 	                      <option value="">wiecej</option>
 	                    </select>
 	                  </div>
-		              </div>
+		              </div>-->
 		              <div class="form-group">
 		                <input type="submit" value="Search" class="btn btn-primary py-3 px-5">
 		              </div>
@@ -89,6 +96,7 @@
 
 <!-- koniec szukacza -->
 
+
      <div class="col-lg-9">
           	<div class="row">
           		<div class="col-md-12 ftco-animate">
@@ -105,37 +113,35 @@
           			</div>
           		</div>
           		<div class="col-md-12 hotel-single mt-4 mb-5 ftco-animate">
-          			<span>Kreatywne animacje</span>
-          			<h2>Animacje na każdą okazję</h2>
+          			<span>{{ anim_single.anim_tags }}</span>
+          			<h2>{{ anim_single.anim_name }}</h2>
           			<p class="rate mb-5">
-          				<span class="loc"><a href="#"><i class="icon-map"></i> Iwanowice Dworskie, małopolskie</a></span>
+          				<span class="loc"><a href="#"><i class="icon-map"></i> {{attr_single.address}} </a></span>
           				<span class="star">
     							<i class="icon-star"></i>
     							<i class="icon-star"></i>
     							<i class="icon-star"></i>
     							<i class="icon-star"></i>
     							<i class="icon-star-o"></i>
-    							8 Rating</span>
+    							Ocena</span>
     						</p>
-    						<p>KREACJA to zespół młodych ludzi pozytywnie zakręconych z pasją i głową pełną pomysłów, którzy SZYJĄ IMPREZY NA MIARĘ. 
-								Prowadzimy animacje dla dzieci na piknikach, komuniach, chrzcinach, weselach, urodzinach, w przedszkolach, szkołach, firmach, oraz innych eventach. </p>
+    						<p>{{ anim_single.description }}</p>
     						<div class="d-md-flex mt-5 mb-5">
     							<ul>
-	    							<li>ilość osób</li>
-	    							<li>cena</li>
-	    							<li>czas</li>
+	    							<li>Dla ilu osób: {{ anim_single.anim_people }}</li>
+	    							<li>Cena: {{ anim_single.anim_price }}</li>
+	    							<li>Czas trwania: {{ anim_single.anim_duration }}</li>
 	    						</ul>
 	    						<ul class="ml-md-5">
 	    							<li>wiadomosc</li>
 	    							<li>zarezerwuj</li>
-	    							<li>www</li>
+	    							<li><b>Strona www:</b> <a href="">{{ anim_single.anim_www }}</a></li>
 	    						</ul>
     						</div>
-    						<p>Zapewniamy sprzęt do organizacji ww. zabaw, a posiadamy także skakanki, piłki, paletki, materiały plastyczne.
-								Nasi animatorzy ubrani są w kolorowe koszulki i tiulowe spódniczki. Po uzgodnieniu mogą również wystąpić w strojach tematycznych nawiązujących do tematu przewodniego imprezy.
-								W standardowej ofercie zapewniamy także stanowisko z małym namiotem, parawan, poduszki.
-								Dla Państwa komfortu i radości Małych Gości animacje prowadzą dwie animatorki z bogatym doświadczeniem.
-							</p>
+    						<p>{{ attr_single.rules }}</p>
+
+	<!--wabik-->
+
           		</div>
           		<div class="col-md-12 hotel-single ftco-animate mb-5 mt-4">
           			<h4 class="mb-4">Nasze atrakcje</h4>
@@ -146,26 +152,26 @@
 				    					<div class="text p-3">
 				    						<div class="d-flex">
 				    							<div class="one">
-						    						<h3><a href="hotel-single.html">Hotel, Italy</a></h3>
-						    						<p class="rate">
+						    						<h3><a href="hotel-single.html">Clown</a></h3>
+						    						<!--<p class="rate">
 						    							<i class="icon-star"></i>
 						    							<i class="icon-star"></i>
 						    							<i class="icon-star"></i>
 						    							<i class="icon-star"></i>
 						    							<i class="icon-star-o"></i>
 						    							<span>8 Rating</span>
-						    						</p>
+						    						</p>-->
 					    						</div>
-					    						<div class="two">
+					    						<!--<div class="two">
 					    							<span class="price per-price">$40<br><small>/night</small></span>
-				    							</div>
+				    							</div>-->
 				    						</div>
 				    						<p>Far far away, behind the word mountains, far from the countries</p>
 				    						<hr>
-				    						<p class="bottom-area d-flex">
+				    						<!--<p class="bottom-area d-flex">
 				    							<span><i class="icon-map-o"></i> Miami, Fl</span> 
 				    							<span class="ml-auto"><a href="#">Book Now</a></span>
-				    						</p>
+				    						</p>-->
 				    					</div>
 				    				</div>
 				    			</div>
@@ -175,26 +181,26 @@
 				    					<div class="text p-3">
 				    						<div class="d-flex">
 				    							<div class="one">
-						    						<h3><a href="hotel-single.html">Hotel, Italy</a></h3>
-						    						<p class="rate">
+						    						<h3><a href="hotel-single.html">Mikołaj</a></h3>
+						    						<!--<p class="rate">
 						    							<i class="icon-star"></i>
 						    							<i class="icon-star"></i>
 						    							<i class="icon-star"></i>
 						    							<i class="icon-star"></i>
 						    							<i class="icon-star-o"></i>
 						    							<span>8 Rating</span>
-						    						</p>
+						    						</p>-->
 					    						</div>
-					    						<div class="two">
+					    						<!--<div class="two">
 					    							<span class="price per-price">$40<br><small>/night</small></span>
-				    							</div>
+				    							</div>-->
 				    						</div>
 				    						<p>Far far away, behind the word mountains, far from the countries</p>
 				    						<hr>
-				    						<p class="bottom-area d-flex">
+				    						<!--<p class="bottom-area d-flex">
 				    							<span><i class="icon-map-o"></i> Miami, Fl</span> 
 				    							<span class="ml-auto"><a href="#">Book Now</a></span>
-				    						</p>
+				    						</p>-->
 				    					</div>
 				    				</div>
 				    			</div>
@@ -204,33 +210,35 @@
 				    					<div class="text p-3">
 				    						<div class="d-flex">
 				    							<div class="one">
-						    						<h3><a href="hotel-single.html">Hotel, Italy</a></h3>
-						    						<p class="rate">
+						    						<h3><a href="hotel-single.html">Elf</a></h3>
+						    						<!--<p class="rate">
 						    							<i class="icon-star"></i>
 						    							<i class="icon-star"></i>
 						    							<i class="icon-star"></i>
 						    							<i class="icon-star"></i>
 						    							<i class="icon-star-o"></i>
 						    							<span>8 Rating</span>
-						    						</p>
+						    						</p>-->
 					    						</div>
-					    						<div class="two">
+					    						<!--<div class="two">
 					    							<span class="price per-price">$40<br><small>/night</small></span>
-				    							</div>
+				    							</div>-->
 				    						</div>
 				    						<p>Far far away, behind the word mountains, far from the countries</p>
 				    						<hr>
-				    						<p class="bottom-area d-flex">
+				    						<!--<p class="bottom-area d-flex">
 				    							<span><i class="icon-map-o"></i> Miami, Fl</span> 
 				    							<span class="ml-auto"><a href="#">Book Now</a></span>
-				    						</p>
+				    						</p>-->
 				    					</div>
 				    				</div>
 				    			</div>
           			</div>
           		</div>
+
+	<!---->
           		<div class="col-md-12 hotel-single ftco-animate mb-5 mt-4">
-          			<h4 class="mb-5">Check Availability &amp; Booking</h4>
+          			<h4 class="mb-5">Napisz do nas &amp; Zapyta</h4>
           			<div class="fields">
           				<div class="row">
           					<div class="col-md-6">
@@ -243,7 +251,7 @@
 				                <input type="text" class="form-control" placeholder="Email">
 				              </div>
 			              </div>
-			              <div class="col-md-6">
+			              <!--<div class="col-md-6">
 				              <div class="form-group">
 				                <input type="text" class="form-control checkin_date" placeholder="Date from">
 				              </div>
@@ -324,10 +332,25 @@
 									      	<p class="rate"><span><i class="icon-star"></i><i class="icon-star-o"></i><i class="icon-star-o"></i><i class="icon-star-o"></i><i class="icon-star-o"></i> 0 Ratings</span></p>
 										    </label>
 										  </div>
-										</form>
+										</form>-->
+						<div class="col-md-12">
+						  	<div class="input-group">
+  								<!--<div class="input-group-prepend">
+    								<span class="input-group-text">Twoje pytanie</span>
+  								</div>-->
+  								<textarea class="form-control" aria-label="With textarea" placeholder="Twoje pytanie"></textarea>
+							</div>
+				            <div class="col-md-12">
+				              <div class="form-group">
+				                <input type="submit" value="Wyślij!" class="btn btn-primary py-3">
+				              </div>
+			              	</div>
+						  </div>
           				</div>
           			</div>
           		</div>
+
+	<!---->
           		<div class="col-md-12 hotel-single ftco-animate mb-5 mt-5">
           			<h4 class="mb-4">Related Hotels</h4>
           			<div class="row">

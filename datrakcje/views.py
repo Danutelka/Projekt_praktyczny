@@ -1,22 +1,28 @@
 from django.shortcuts import render
+from django.shortcuts import redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template.response import TemplateResponse
 from django.views import View
 from django.views.generic.edit import FormView, CreateView, UpdateView, DeleteView
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import get_object_or_404
+from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.signing import BadSignature
 from django.conf import settings
 import django.contrib.auth.decorators
 from django.contrib.auth.models import Permission
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.conf.urls.static import static
-from .models import Attraction, Animation, PEOPLE, AGE, DURATION, ZAKRES, AnimTag, AttrTag, GeneralFoto
+from django.core.mail import send_mail
+from .models import Attraction, Animation, PEOPLE, AGE, DURATION, ZAKRES, AnimTag, AttrTag, GeneralFoto,  \
+    Wabik, Newsletter
 from .forms import AddAtractionForm, AddAnimationForm, AddAttrTagForm, AddAnimTagForm,  \
-    AddGeneralFotoForm, LoginForm, RegisterForm, SearchGeneralForm
+    AddGeneralFotoForm, LoginForm, RegisterForm, SearchGeneralForm, EditAtractionForm, EditAnimationForm,  \
+    ContactUsForm, NewsletterForm
 # Create your views here.
 
 class BaseView(View):
@@ -30,10 +36,6 @@ class StartView(View):
 class AboutView(View):
     def get(self, request):
         return TemplateResponse(request, 'about.html')
-
-class ContactView(View):
-    def get(self, request):
-        return TemplateResponse(request, 'contact.html')
 
 class BlogView(View):
     def get(self, request):
@@ -89,24 +91,30 @@ class AddGeneralFoto(View):
 
 class AtrakcjeView(View):
     def get(self, request):
-        attr_all = Attraction.objects.all()
-        return TemplateResponse(request, 'atrakcje.html', context={"attr_all": attr_all})
+        attraction = Attraction.objects.all()
+        ctx = {
+            "attraction" : attraction
+        }
+        return TemplateResponse(request, 'atrakcje.html', ctx)
 
 class AtrakcjeSingleView(View):
     #def get(self, request):
     #    return TemplateResponse(request, 'atrakcje-single.html')
     def get(self, request, pk):
         attr_single = get_object_or_404(Attraction, id=pk)
-        # fotos = GeneralFoto.objecects.all()
+        tags = AttrTag.objects.all()
+        fotos = GeneralFoto.objects.all()
+        wabik = Wabik.objects.all()
         context ={
             "attr_single": attr_single,
             "people": PEOPLE,
             "age": AGE,
             "duration": DURATION,
-            #"fotos": fotos
+            "tags" : tags,
+            "fotos": fotos,
+            "wabik": wabik
         }
-        return TemplateResponse(request, 'atrakcje-single.html', context={"attr_single": attr_single,  \
-                                "people": PEOPLE, "age": AGE, "duration": DURATION})
+        return TemplateResponse(request, 'atrakcje-single.html', context=context)
 
 #class AddAtractionView(CreateView):
 #    model = Attraction
@@ -136,20 +144,60 @@ class AddAtrakcjeView(View):
                 attr_price=attr_price, attr_duration=attr_duration, attr_www=attr_www, attr_wabik=attr_wabik)
             return HttpResponseRedirect("atrakcje")
 
+class EditAtrakcje(View):
+    def get(self, request, pk):
+        form = EditAtractionForm()
+        atr = Attraction.objects.get(id=pk)
+        ctx = {
+            "form": form,
+            "atr": atr
+        }
+        return TemplateResponse(request, 'edit-atrakcje.html', ctx)
+    def post(self, request, pk):
+        form = EditAtractionForm(request.POST)
+        atr = Attraction.objects.get(id=pk)
+        if form.is_valid():
+            atr.attr_name = form.cleaned_data['attr_name']
+            atr.address = form.cleaned_data['address']
+            atr.description = form.cleaned_data['description']
+            atr.rules = form.cleaned_data['rules']
+            atr.attr_tag = form.cleaned_data['attr_tag']
+            atr.attr_foto = form.cleaned_data['attr_foto']
+            atr.attr_people = form.cleaned_data['attr_people']
+            atr.attr_price = form.cleaned_data['attr_price']
+            atr.attr_duration = form.cleaned_data['attr_duration']
+            atr.attr_www = form.cleaned_data['attr_www']
+            atr.attr_wabik = form.cleaned_data['attr_wabik']
+            atr.save()
+            return HttpResponseRedirect("atrakcje")
+
+
 class AnimacjeView(View):
     def get(self, request):
-        anim_all = Animation.objects.all()
-        return TemplateResponse(request, 'animacje.html', context={"anim_all": anim_all})
+        animation = Animation.objects.all()
+        ctx = {
+            "animation": animation
+        }
+        return TemplateResponse(request, 'animacje.html', ctx)
 
 class AnimacjeSingleView(View):
-    def get(self, request):
-        return TemplateResponse(request, 'animacje-single.html')
-    #def get(self, request, pk):
-        #anim_single = get_object_or_404(Animation, id=pk)
-        #context ={
-        #    "anim_single": anim_single
-        #}
-        #return TemplateResponse(request, 'animacje-single.html', context)
+    # def get(self, request):
+        # return TemplateResponse(request, 'animacje-single.html')
+    def get(self, request, pk):
+        anim_single = get_object_or_404(Animation, id=pk)
+        tags = AnimTag.objects.all()
+        fotos = GeneralFoto.objects.all()
+        wabik = Wabik.objects.all()
+        context ={
+            "anim_single": anim_single,
+            "people": PEOPLE,
+            "age": AGE,
+            "duration": DURATION,
+            "tags": tags,
+            "fotos": fotos,
+            "wabik": wabik
+        }
+        return TemplateResponse(request, 'animacje-single.html', context=context)
 
 class AddAnimacjeView(View):
     def get(self, request):
@@ -176,6 +224,35 @@ class AddAnimacjeView(View):
                 anim_www=anim_www, anim_wabik=anim_wabik)
             return HttpResponseRedirect("animacje")
 
+class EditAnimacje(View):
+    def get(self, request, pk):
+        form = EditAnimationForm()
+        anim = Animation.objects.get(id=pk)
+        ctx = {
+            "form": form,
+            "anim": anim
+        }
+        return TemplateResponse(request, 'edit-animacje.html', ctx)
+    def post(self, request, pk):
+        form = EditAnimationForm(request.POST)
+        anim = Animation.objects.get(id=pk)
+        if form.is_valid():
+            anim.anim_name = form.cleaned_data['anim_name']
+            anim.address = form.cleaned_data['address']
+            anim.zakres = form.cleaned_data['zakres']
+            anim.description = form.cleaned_data['description']
+            anim.rules = form.cleaned_data['rules']
+            anim.anim_tag = form.cleaned_data['anim_tag']
+            anim.anim_foto = form.cleaned_data['anim_foto']
+            anim.anim_people = form.cleaned_data['anim_people']
+            anim.anim_price = form.cleaned_data['anim_price']
+            anim.anim_duration = form.cleaned_data['anim_duration']
+            anim.anim_www = form.cleaned_data['anim_www']
+            anim.anim_wabik = form.cleaned_data['anim_wabik']
+            anim.save()
+            return HttpResponseRedirect("animacje")
+
+
 class LoginView(View):
     def get(self, request):
         form = LoginForm()
@@ -187,9 +264,10 @@ class LoginView(View):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                return HttpResponse('zalogowany')
+                #return HttpResponse('zalogowany')
+                return TemplateResponse(request, 'zalogowano.html')
             else:
-                return HttpResponse('ups niepoprawne logowanie')
+                return TemplateResponse(request, 'bad-login.html')
         return render(request, 'login.html', context={'form':form})
 
 def user_logout(request):
@@ -218,7 +296,52 @@ class RegisterView(View):
                     error.append('Hasła są różne')
             else:
                 error.append('użytkownik isnieje')
-        return render(request, 'register.html', cotext={'form':form, 'error':error})
+        return render(request, 'register.html', context={'form':form, 'error':error})
+
+#class ContactView(View):
+#    def get(self, request):
+#        return TemplateResponse(request, 'contact.html')
+
+
+class ContactUsView(View):
+    def get(self, request):
+        form = ContactUsForm()
+        return TemplateResponse(request, 'contact.html', context={'form': form})
+    def post(self, request):
+        form = ContactUsForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            email = form.cleaned_data['email']
+            temat = form.cleaned_data['temat']
+            tekst = form.cleaned_data['tekst']
+            # send email code goes here
+            message = "{} wysłał/a wiadomość na temat {}, o treści {}".format(name, temat, tekst)
+            send_mail('New Enquiry', message, email, ['contact@kiddme.com'])
+            return TemplateResponse(request, 'contact-answer.html')
+        else:
+            return TemplateResponse(request, 'contact.html', context={'form': form})
+        #return TemplateResponse(request, 'contact', {'form': form} 
+
+class NewsletterView(View):
+    def get(self, request):
+        form = NewsletterForm()
+        return TemplateResponse(request, 'newsletter.html', context={'form': form})
+    def post(self, request):
+        form = NewsletterForm(request.POST)
+        error = []
+        if form.is_valid():
+            email = form.cleaned_data['email']
+            is_active = form.cleaned_data['is_active']
+            if not Newsletter.objects.filter(email=email).exists():
+                Newsletter.objects.create(email=email, is_active=is_active)
+                return TemplateResponse(request, 'news-answer.html')
+            else:
+                error.append('Na ten email pzesyłamy już nasz newsletter')
+        return TemplateResponse(request, 'newsletter.html', context={'form':form, 'error':error})
+
+class NewsletterAnswerView(View):
+        def get(self, request):
+            return TemplateResponse(request, 'news-answer.html')
 
 class SearchAttractionView(View):
     def get(self, request):

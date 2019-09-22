@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}add-atrakcje{% endblock %}
+{% block title %}edit-atrakcje{% endblock %}
 
 {% block content %}
 <div class="hero-wrap js-fullheight" style="background-image: url({% static '/images/add-all.jpg' %});">
@@ -9,7 +9,7 @@
       <div class="container">
         <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center" data-scrollax-parent="true">
           <div class="col-md-9 text-center ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
-            <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Dodaj atrakcje</h1>
+            <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Edytuj atrakcje</h1>
           </div>
         </div>
       </div>
@@ -22,8 +22,9 @@
           <form method="POST">
           {% csrf_token %}
           {{ form.as_p }}
+          {{ atr.id }}
           <div class="row d-flex justify-content-center">
-          <input type="submit" class="btn-primary-add" value="Dodaj atrakcję">
+          <input type="submit" value="Zapisz zmiany">
           </div>
           </form>
         </div>

@@ -10,7 +10,7 @@
       <div class="container">
         <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center" data-scrollax-parent="true">
           <div class="col-md-9 text-center ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
-            <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Contact</h1>
+            <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Kontakt</h1>
           </div>
         </div>
       </div>
@@ -20,39 +20,42 @@
       <div class="container">
         <div class="row d-flex mb-5 contact-info">
           <div class="col-md-12 mb-4">
-            <h2 class="h4">Contact Information</h2>
+            <h2 class="h4">Informacje kontaktowe</h2>
           </div>
           <div class="w-100"></div>
           <div class="col-md-3">
-            <p><span>Address:</span> 198 West 21th Street, Suite 721 New York NY 10016</p>
+            <p><span>Adres:</span> 198 West 21th Street, Suite 721 New York NY 10016</p>
           </div>
           <div class="col-md-3">
-            <p><span>Phone:</span> <a href="tel://1234567920">+ 1235 2355 98</a></p>
+            <p><span>Telefon:</span> <!--<a href="tel://1234567920">-->+48 666 666 666<!--</a>--></p>
           </div>
           <div class="col-md-3">
-            <p><span>Email:</span> <a href="mailto:info@yoursite.com">info@yoursite.com</a></p>
+            <p><span>Email:</span> <!--<a href="mailto:info@yoursite.com">-->info@kiddme.com<!--</a>--></p>
           </div>
           <div class="col-md-3">
-            <p><span>Website</span> <a href="#">yoursite.com</a></p>
+            <p><span>www:</span> <a href="index">kiddme.com</a></p>
           </div>
         </div>
         <div class="row block-9">
           <div class="col-md-6 order-md-last pr-md-5">
+            <form method="POST">
             <form action="#">
-              <div class="form-group">
-                <input type="text" class="form-control" placeholder="Your Name">
+              {% csrf_token %}
+              {{ form.as_p }}
+              <!--<div class="form-group">
+                <input type="text" class="form-control" placeholder="Wpisz imię">
               </div>
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="Your Email">
+                <input type="text" class="form-control" placeholder="Wpisz Email">
               </div>
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="Subject">
+                <input type="text" class="form-control" placeholder="Temat">
               </div>
               <div class="form-group">
-                <textarea name="" id="" cols="30" rows="7" class="form-control" placeholder="Message"></textarea>
-              </div>
+                <textarea name="" id="" cols="30" rows="7" class="form-control" placeholder="Treść wiadomości"></textarea>
+              </div>-->
               <div class="form-group">
-                <input type="submit" value="Send Message" class="btn btn-primary py-3 px-5">
+                <input type="submit" value="Wyślij" class="btn btn-primary py-3 px-5">
               </div>
             </form>
           

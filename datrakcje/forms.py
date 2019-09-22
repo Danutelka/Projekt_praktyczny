@@ -2,7 +2,7 @@ from django import forms
 from django.core.validators import URLValidator, EmailValidator
 from django.core.exceptions import ValidationError
 from .models import Attraction, Animation, PEOPLE, DURATION, ZAKRES, AttrTag, AnimTag,  \
-    GeneralFoto, Wabik
+    GeneralFoto, Wabik, Newsletter
 
 def validate_two_dots(value):
     if value.count('.') <2:
@@ -34,6 +34,21 @@ class AddAtractionForm(forms.Form):
     attr_www = forms.CharField(validators= [validate_two_dots, URLValidator()], label="Podlinkuj swoja stronę www", max_length=128)
     attr_wabik = forms.ModelMultipleChoiceField(queryset=Wabik.objects.all(), widget=forms.CheckboxSelectMultiple, label="Special offer:", help_text="* możesz to zrobić później", required=False)
     
+class EditAtractionForm(forms.Form):
+    attr_name = forms.CharField(label="Edytuj nazwę", max_length=128)
+    address = forms.CharField(label="Edytuj adres", max_length=64)
+    attr_rating = forms.IntegerField(widget=forms.HiddenInput, initial=0)
+    created = forms.DateField(widget=forms.HiddenInput)
+    description = forms.CharField(widget=forms.Textarea(), label="Edytuj opis swoich usług")
+    rules = forms.CharField(widget=forms.Textarea(), label="Edytuj opis zasad i regulaminu")
+    votes = forms.IntegerField(widget=forms.HiddenInput, initial=0)
+    attr_tag = forms.ModelMultipleChoiceField(queryset= AttrTag.objects.all(), widget=forms.CheckboxSelectMultiple, label="Wybierz tagi", help_text="* przytrzymaj klawisz Ctrl, aby dodać więcej niż 1")
+    attr_foto = forms.ModelMultipleChoiceField(queryset=GeneralFoto.objects.all(), widget=forms.CheckboxSelectMultiple, label="Dodaj foto", help_text="* możesz to zrobić później", required=False)
+    attr_people = forms.MultipleChoiceField(widget=forms.RadioSelect, choices=PEOPLE, label="wybierz liczbę osób")
+    attr_price = forms.CharField(label="Określ cenę", max_length=24)
+    attr_duration = forms.ChoiceField(widget=forms.RadioSelect, label="Czas trwania atrakcji", choices=DURATION)
+    attr_www = forms.CharField(validators= [validate_two_dots, URLValidator()], label="Podlinkuj swoja stronę www", max_length=128)
+    attr_wabik = forms.ModelMultipleChoiceField(queryset=Wabik.objects.all(), widget=forms.CheckboxSelectMultiple, label="Special offer:", help_text="* możesz to zrobić później", required=False)
 
 class AddAnimationForm(forms.Form):
     anim_name = forms.CharField(label="Wpisz nazwę", max_length=128)
@@ -43,6 +58,23 @@ class AddAnimationForm(forms.Form):
     created = forms.DateField(widget=forms.HiddenInput)
     description = forms.CharField(widget=forms.Textarea(), label="Opisz swoje usługi")
     rules = forms.CharField(widget=forms.Textarea(), label="Opisz zasady i regulamin")
+    votes = forms.IntegerField(widget=forms.HiddenInput, initial=0)
+    anim_tag = forms.ModelMultipleChoiceField(queryset=AnimTag.objects.all(), widget=forms.CheckboxSelectMultiple, label="Wybierz tagi", help_text="* przytrzymaj klawisz Ctrl, aby dodać więcej niż 1")
+    anim_foto = forms.ModelMultipleChoiceField(queryset=GeneralFoto.objects.all(), widget=forms.CheckboxSelectMultiple, label="Dodaj foto", help_text="* możesz to zrobić później", required=False)
+    anim_people = forms.MultipleChoiceField(widget=forms.RadioSelect, choices=PEOPLE, label="wybierz liczbę osób")
+    anim_price = forms.CharField(label="Określ cenę", max_length=24)
+    anim_duration = forms.ChoiceField(widget=forms.RadioSelect, label="Czas trwania atrakcji", choices=DURATION)
+    anim_www = forms.CharField(validators= [validate_two_dots, URLValidator()], label="Podlinkuj swoja stronę www", max_length=128)
+    anim_wabik = forms.ModelMultipleChoiceField(queryset=Wabik.objects.all(), widget=forms.CheckboxSelectMultiple, label="Special offer", help_text="* możesz to zrobić później", required=False)
+
+class EditAnimationForm(forms.Form):
+    anim_name = forms.CharField(label="Edytuj nazwę", max_length=128)
+    address = forms.CharField(label="Edytuj miasto", max_length=64)
+    zakres = forms.ChoiceField(widget=forms.RadioSelect, choices=ZAKRES, label="Zmień zasięg świadczonych usług")
+    anim_rating = forms.IntegerField(widget=forms.HiddenInput, initial=0)
+    created = forms.DateField(widget=forms.HiddenInput)
+    description = forms.CharField(widget=forms.Textarea(), label="Zmień opis swoje usługi")
+    rules = forms.CharField(widget=forms.Textarea(), label="Zmień opis zasad i regulaminu")
     votes = forms.IntegerField(widget=forms.HiddenInput, initial=0)
     anim_tag = forms.ModelMultipleChoiceField(queryset=AnimTag.objects.all(), widget=forms.CheckboxSelectMultiple, label="Wybierz tagi", help_text="* przytrzymaj klawisz Ctrl, aby dodać więcej niż 1")
     anim_foto = forms.ModelMultipleChoiceField(queryset=GeneralFoto.objects.all(), widget=forms.CheckboxSelectMultiple, label="Dodaj foto", help_text="* możesz to zrobić później", required=False)
@@ -69,6 +101,16 @@ class RegisterForm(forms.Form):
     last_name = forms.CharField(label="wpisz nazwisko", max_length=64)
     email = forms.CharField(validators=[EmailValidator()])
     log_on = forms.BooleanField(label="Logowanie po rejestracji:",required=False)
+
+class ContactUsForm(forms.Form):
+    name = forms.CharField(max_length=100, label="Wpisz Twoje imię")
+    email = forms.EmailField(label="Wpisz email")
+    temat = forms.CharField(max_length=100, label="Określ temat")
+    tekst = forms.CharField(widget=forms.Textarea(), label="Wpisz treść wiadomości")
+
+class NewsletterForm(forms.Form):
+    email = forms.EmailField(label="Wpisz email", max_length=150)
+    is_active = forms.BooleanField(initial=False, label="Zgadzam się na przesyłanie newslettera")
 
 class SearchGeneralForm(forms.Form):
     name = forms.CharField(label="wyszukaj")
