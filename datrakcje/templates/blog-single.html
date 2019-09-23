@@ -3,47 +3,120 @@
 
 {% block title %} Blog-single{% endblock %}
    
-     {% block content %}   
+{% block content %}   
 
     <div class="hero-wrap js-fullheight" style="background-image: url({% static '/images/bg_blog.jpg' %});">
       <div class="overlay"></div>
       <div class="container">
         <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center" data-scrollax-parent="true">
           <div class="col-md-9 text-center ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
-            <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Tips &amp; Articles</h1>
+            <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Blog</h1>
           </div>
         </div>
       </div>
     </div>
 
-    <section class="ftco-section ftco-degree-bg">
+
+<!--szukacz-->
+<section class="ftco-section">
       <div class="container">
         <div class="row">
+        	{% comment %} <div class="col-lg-3 sidebar order-md-last ftco-animate">
+        		<div class="sidebar-wrap ftco-animate">
+        			<h3 class="heading mb-4">Szukaj</h3>
+        			<form action="#">
+        				<div class="fields">
+		              <div class="form-group">
+		                <input type="text" class="form-control" placeholder="atrakcje">
+		              </div>
+		              <!--<div class="form-group">
+		                <input type="text" id="checkin_date" class="form-control checkin_date" placeholder="Date from">
+		              </div>
+		              <div class="form-group">
+		                <input type="text" id="checkout_date" class="form-control checkout_date" placeholder="Date to">
+		              </div>-->
+                  <div class="form-group">
+		                <input type="text" class="form-control" placeholder="animacje">
+		              </div>
+                  <div class="form-group">
+		                <input type="text" class="form-control" placeholder="miejsowość">
+		              </div>
+						<!--<div class="form-group">
+		                <div class="select-wrap one-third">
+	                    <div class="icon"><span class="ion-ios-arrow-down"></span></div>
+	                    <select name="" id="" class="form-control" placeholder="Liczba osób">
+	                      <option value="">Liczba osób</option>
+	                      <option value="">2-3</option>
+	                      <option value="">4-6</option>
+	                      <option value="">wiecej</option>
+	                    </select>
+	                  </div>
+		              </div>-->
+		              <div class="form-group">
+		                <input type="submit" value="Search" class="btn btn-primary py-3 px-5">
+		              </div>
+		            </div>
+	            </form>
+        		</div>
+        		<div class="sidebar-wrap ftco-animate">
+        			<h3 class="heading mb-4">Star Rating</h3>
+        			<form method="post" class="star-rating">
+							  <div class="form-check">
+									<input type="checkbox" class="form-check-input" id="exampleCheck1">
+									<label class="form-check-label" for="exampleCheck1">
+										<p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></span></p>
+									</label>
+							  </div>
+							  <div class="form-check">
+						      <input type="checkbox" class="form-check-input" id="exampleCheck1">
+						      <label class="form-check-label" for="exampleCheck1">
+						    	   <p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star-o"></i></span></p>
+						      </label>
+							  </div>
+							  <div class="form-check">
+						      <input type="checkbox" class="form-check-input" id="exampleCheck1">
+						      <label class="form-check-label" for="exampleCheck1">
+						      	<p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star-o"></i><i class="icon-star-o"></i></span></p>
+						     </label>
+							  </div>
+							  <div class="form-check">
+							    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+						      <label class="form-check-label" for="exampleCheck1">
+						      	<p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star-o"></i><i class="icon-star-o"></i><i class="icon-star-o"></i></span></p>
+						      </label>
+							  </div>
+							  <div class="form-check">
+						      <input type="checkbox" class="form-check-input" id="exampleCheck1">
+						      <label class="form-check-label" for="exampleCheck1">
+						      	<p class="rate"><span><i class="icon-star"></i><i class="icon-star-o"></i><i class="icon-star-o"></i><i class="icon-star-o"></i><i class="icon-star-o"></i></span></p>
+							    </label>
+							  </div>
+							</form>
+        		</div>
+          </div> {% endcomment %}
+{% comment %} </section> {% endcomment %}
+<!-- koniec szukacza -->
+{% include 'szukacz-bok.html' %}
+<!---->
+{% comment %} <section class="ftco-section ftco-degree-bg"> {% endcomment %}
+      {% comment %} <div class="container">
+        <div class="row"> {% endcomment %}
           <div class="col-md-8 ftco-animate">
-            <h2 class="mb-3">10 Tips For The Traveler</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis, eius mollitia suscipit, quisquam doloremque distinctio perferendis et doloribus unde architecto optio laboriosam porro adipisci sapiente officiis nemo accusamus ad praesentium? Esse minima nisi et. Dolore perferendis, enim praesentium omnis, iste doloremque quia officia optio deserunt molestiae voluptates soluta architecto tempora.</p>
-            <p>
-              <img src="{% static '/images/image_7.jpg' %}" alt="" class="img-fluid">
-            </p>
-            <p>Molestiae cupiditate inventore animi, maxime sapiente optio, illo est nemo veritatis repellat sunt doloribus nesciunt! Minima laborum magni reiciendis qui voluptate quisquam voluptatem soluta illo eum ullam incidunt rem assumenda eveniet eaque sequi deleniti tenetur dolore amet fugit perspiciatis ipsa, odit. Nesciunt dolor minima esse vero ut ea, repudiandae suscipit!</p>
-            <h2 class="mb-3 mt-5">#2. Creative WordPress Themes</h2>
-            <p>Temporibus ad error suscipit exercitationem hic molestiae totam obcaecati rerum, eius aut, in. Exercitationem atque quidem tempora maiores ex architecto voluptatum aut officia doloremque. Error dolore voluptas, omnis molestias odio dignissimos culpa ex earum nisi consequatur quos odit quasi repellat qui officiis reiciendis incidunt hic non? Debitis commodi aut, adipisci.</p>
-            <p>
-              <img src="{% static '/images/image_8.jpg' %}" alt="" class="img-fluid">
-            </p>
-            <p>Quisquam esse aliquam fuga distinctio, quidem delectus veritatis reiciendis. Nihil explicabo quod, est eos ipsum. Unde aut non tenetur tempore, nisi culpa voluptate maiores officiis quis vel ab consectetur suscipit veritatis nulla quos quia aspernatur perferendis, libero sint. Error, velit, porro. Deserunt minus, quibusdam iste enim veniam, modi rem maiores.</p>
-            <p>Odit voluptatibus, eveniet vel nihil cum ullam dolores laborum, quo velit commodi rerum eum quidem pariatur! Quia fuga iste tenetur, ipsa vel nisi in dolorum consequatur, veritatis porro explicabo soluta commodi libero voluptatem similique id quidem? Blanditiis voluptates aperiam non magni. Reprehenderit nobis odit inventore, quia laboriosam harum excepturi ea.</p>
-            <p>Adipisci vero culpa, eius nobis soluta. Dolore, maxime ullam ipsam quidem, dolor distinctio similique asperiores voluptas enim, exercitationem ratione aut adipisci modi quod quibusdam iusto, voluptates beatae iure nemo itaque laborum. Consequuntur et pariatur totam fuga eligendi vero dolorum provident. Voluptatibus, veritatis. Beatae numquam nam ab voluptatibus culpa, tenetur recusandae!</p>
-            <p>Voluptas dolores dignissimos dolorum temporibus, autem aliquam ducimus at officia adipisci quasi nemo a perspiciatis provident magni laboriosam repudiandae iure iusto commodi debitis est blanditiis alias laborum sint dolore. Dolores, iure, reprehenderit. Error provident, pariatur cupiditate soluta doloremque aut ratione. Harum voluptates mollitia illo minus praesentium, rerum ipsa debitis, inventore?</p>
-            <div class="tag-widget post-tag-container mb-5 mt-5">
+            <h2 class="mb-3">{{ news_single.title }}</h2>
+              <p>{{ news_single.content }}</p>
+              <p><img src="{{ news_single.foto }}" alt="" class="img-fluid"></p>
               <div class="tagcloud">
-                <a href="#" class="tag-cloud-link">Life</a>
-                <a href="#" class="tag-cloud-link">Sport</a>
+                <a href="#" class="tag-cloud-link">{{ news_single.blog_tag }}</a>
+                <!--<a href="#" class="tag-cloud-link">Sport</a>
                 <a href="#" class="tag-cloud-link">Tech</a>
-                <a href="#" class="tag-cloud-link">Travel</a>
+                <a href="#" class="tag-cloud-link">Travel</a>-->
               </div>
-            </div>
-            
+              <span> Autor: {{ news_single.user }} opublikowano: {{ news_single.posted_date }}</span>
+          </div>
+        </div>
+      </div>
+
+<!--autor
             <div class="about-author d-flex p-4 bg-light">
               <div class="bio mr-5">
                 <img src="{% static '/images/person_1.jpg' %}" alt="Image placeholder" class="img-fluid mb-4">
@@ -52,12 +125,74 @@
                 <h3>George Washington</h3>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus itaque, autem necessitatibus voluptate quod mollitia delectus aut, sunt placeat nam vero culpa sapiente consectetur similique, inventore eos fugit cupiditate numquam!</p>
               </div>
-            </div>
+            </div>-->            
 
+      {% for c in comments %}
+
+      <div class="pt-5 mt-5">
+          <h3 class="mb-5">Komentarze</h3>
+            <ul class="comment-list">
+              <li class="comment">
+              <div class="comment-body">
+                    <h3>{{ c.user }}</h3>
+                    <div class="meta">{{ c.posted_date }}</div>
+                    <p>{{ c.text }}</p>
+              </div>
+              </li>
+            </ul>
+      </div>
+      {% endfor %}
+<!--
+      {% if news_single.comment_set.all %}
+        <div class="pt-5 mt-5">
+          <h3 class="mb-5">Komentarze</h3>
+            <ul class="comment-list">
+            {% for comment in news_single.comment_set.all %}
+        <!-<span>
+            <a href="{{ comment.website }}">{{ comment.name }}</a> said on {{ comment.created_on }}
+        </span>
+        <p>
+            {{ comment.text }}
+        </p>->
+              <li class="comment">
+                  <!-<div class="vcard bio">
+                    <img src="{% static '/images/person_1.jpg' %}" alt="Image placeholder">
+                  </div>->
+                <div class="comment-body">
+                    <h3>{{ comment.user }}</h3>
+                    <div class="meta">{{ comment.posted_date }}</div>
+                    <p>{{ comment.text }}</p>
+                    <!--<p><a href="#" class="reply">Reply</a></p>->
+                </div>
+              </li>
+              </ul>
+            {% endfor %}
+        </div>
+      {% endif %}-->
+
+<br />
+
+<form>  
+    <div class="comment-form-wrap pt-5">
+      <h3 class="mb-5">Napisz komentarz</h3>
+          <form action="" method="POST">
+          <form class="p-5 bg-light">
+            <div class="form-group">
+              {% csrf_token %}
+              {{ form.as_p }}
+              <input type="submit" name="submit" value="Opublikuj komentarz" />
+            </div>
+    </div>
+
+</form>
+{% comment %} </section> {% endcomment %}
+
+<!--komentarze
 
             <div class="pt-5 mt-5">
               <h3 class="mb-5">6 Comments</h3>
               <ul class="comment-list">
+               
                 <li class="comment">
                   <div class="vcard bio">
                     <img src="{% static '/images/person_1.jpg' %}" alt="Image placeholder">
@@ -137,8 +272,9 @@
                   </div>
                 </li>
               </ul>
-              <!-- END comment-list -->
-              
+  END comment-list -->
+
+<!-- dodawanie komentarza              
               <div class="comment-form-wrap pt-5">
                 <h3 class="mb-5">Leave a comment</h3>
                 <form action="#" class="p-5 bg-light">
@@ -167,7 +303,9 @@
               </div>
             </div>
 
-          </div> <!-- .col-md-8 -->
+      </div> -->
+      
+<!-- .col-md-8 
           <div class="col-md-4 sidebar ftco-animate">
             <div class="sidebar-box">
               <form action="#" class="search-form">
@@ -189,7 +327,7 @@
               </div>
             </div>
 
-            <div class="sidebar-box ftco-animate">
+<!--            <div class="sidebar-box ftco-animate">
               <h3>Recent Blog</h3>
               <div class="block-21 mb-4 d-flex">
                 <a class="blog-img mr-4" style="background-image: url({% static '/images/image_1.jpg' %});"></a>
@@ -248,6 +386,6 @@
 
         </div>
       </div>
-    </section> <!-- .section -->
-
+      -->
+</section>
 {% endblock %}

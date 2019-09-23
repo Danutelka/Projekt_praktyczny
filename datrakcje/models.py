@@ -1,5 +1,6 @@
 from django.db import models
-from newsletter_subscription.models import SubscriptionBase
+from django.contrib.auth.models import User
+#from newsletter_subscription.models import SubscriptionBase
 
 # Create your models here.
 
@@ -63,11 +64,13 @@ class AnimTag(models.Model):
 class GeneralFoto(models.Model):
     title = models.CharField(max_length=32, blank=True, null=True, default="title")
     foto = models.FileField(upload_to="media/general")
+    user = models.OneToOneField(User, on_delete=models.CASCADE, blank=True, null=True)
 
 class Wabik(models.Model):
     wabik_foto = models.ImageField(upload_to = "media/wabik/", blank=True, null=True)
     wabik_title = models.CharField(max_length=32, blank=True, null=True)
     wabik_info = models.CharField(max_length=150, blank=True, null=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, blank=True, null=True)
 
 class Attraction(models.Model):
     attr_name = models.CharField(max_length=128)
@@ -84,6 +87,7 @@ class Attraction(models.Model):
     attr_duration = models.IntegerField(choices=DURATION)
     attr_www = models.CharField(max_length=128)
     attr_wabik = models.ManyToManyField(Wabik)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, blank=True, null=True)
 
     class Meta:
         verbose_name = "Atrakcja"
@@ -108,6 +112,7 @@ class Animation(models.Model):
     anim_duration = models.IntegerField(choices=DURATION)
     anim_www = models.CharField(max_length=128)
     anim_wabik = models.ManyToManyField(Wabik)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, blank=True, null=True)
 
     class Meta:
         verbose_name = "Animacja"
@@ -123,4 +128,29 @@ class Newsletter(models.Model):
 
     def __str__(self):
         return "{}" .format(self.email)
-     
+
+class BlogTag(models.Model):
+    blog_tag = models.CharField(max_length=128)
+
+    def __str__(self):
+        return "{}" .format(self.blog_tag)
+
+class News(models.Model):
+    title = models.CharField(max_length=250)
+    content = models.TextField()
+    foto = models.FileField(upload_to="media/blog", blank=True, null=True)
+    blog_tag = models.ManyToManyField(BlogTag)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+    posted_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return "{}" .format(self.title)
+
+class Comment(models.Model):
+    text = models.CharField(max_length=300)
+    news = models.ForeignKey(News, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    posted_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return "{}" .format(self.text)

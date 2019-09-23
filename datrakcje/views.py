@@ -19,10 +19,10 @@ from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.conf.urls.static import static
 from django.core.mail import send_mail
 from .models import Attraction, Animation, PEOPLE, AGE, DURATION, ZAKRES, AnimTag, AttrTag, GeneralFoto,  \
-    Wabik, Newsletter
+    Wabik, Newsletter, BlogTag, News, Comment
 from .forms import AddAtractionForm, AddAnimationForm, AddAttrTagForm, AddAnimTagForm,  \
     AddGeneralFotoForm, LoginForm, RegisterForm, SearchGeneralForm, EditAtractionForm, EditAnimationForm,  \
-    ContactUsForm, NewsletterForm
+    ContactUsForm, NewsletterForm, ResetPasswordForm, NewsAddForm, NewsEditForm, CommentAddForm
 # Create your views here.
 
 class BaseView(View):
@@ -39,11 +39,77 @@ class AboutView(View):
 
 class BlogView(View):
     def get(self, request):
-        return TemplateResponse(request, 'blog.html')
+        news = News.objects.all().order_by('-posted_date')
+        ctx = {
+            "news" : news
+        }
+        return TemplateResponse(request, 'blog.html', ctx)
 
 class BlogSingleView(View):
+    #def get(self, request):
+    #    return TemplateResponse(request, 'blog-single.html')
+    def get(self, request, pk):
+        news_single = get_object_or_404(News, id=pk)
+        comments = Comment.objects.filter(news_id=news_single)
+        tags = BlogTag.objects.all()
+        form = CommentAddForm()
+        context ={
+            "news_single": news_single,
+            "comments": comments,
+            "tags": tags,
+            "form": form
+        }
+        return TemplateResponse(request, 'blog-single.html', context=context)
+    def post(self, request, pk):
+        news_single = get_object_or_404(News, id=pk)
+        comments = Comment.objects.filter(news_id=news_single)
+        tags = BlogTag.objects.all()
+        form = CommentAddForm(request.POST)
+        if form.is_valid():
+            text = form.cleaned_data['text']
+            data['user'] = str(request.user)
+		    #data['news'] = request.session.get('news')
+            Comment.objects.create(text=text)
+            #comment = form.save(commit=False)
+            #comment.news_single = news_single
+            #comment.save()
+            return HttpResponseRedirect('blog/<int:id>')
+        return TemplateResponse(request, 'blog-single.html', context=context)
+
+class NewsAddView(View):
     def get(self, request):
-        return TemplateResponse(request, 'blog-single.html')
+        form = NewsAddForm()
+        return TemplateResponse(request, 'blog-add.html', context={'form': form})
+    def post(self, request):
+        form = NewsAddForm(request.POST, request.FILES)
+        if form.is_valid():
+            title = form.cleaned_data['title']
+            content = form.cleaned_data['content']
+            foto = form.cleaned_data['foto']
+            blog_tag = form.cleaned_data['blog_tag']
+            News.objects.create(title=title, content=content, foto=foto, blog_tag=blog_tag)
+            return HttpResponseRedirect('blog')
+
+class NewsEditView(View):
+    def get(self, request, pk):
+        form = NewsEditForm()
+        new = News.objects.get(id=pk)
+        ctx = {
+            "form": form,
+            "new": new
+        }
+        return TemplateResponse(request, 'blog-edit.html', ctx)
+    def post(self, request, pk):
+        form = NewsEditForm(request.POST, request.FILES)
+        new = News.objects.get(id=pk)
+        if form.is_valid():
+            new.title = form.cleaned_data['title']
+            new.content = form.cleaned_data['content']
+            new.foto = form.cleaned_data['foto']
+            new.blog_tag = form.cleaned_data['blog_tag']
+            new.save()
+            return HttpResponseRedirect("blog")
+
 
 class AttrTagView(View):
     def get(self, request):
@@ -98,8 +164,6 @@ class AtrakcjeView(View):
         return TemplateResponse(request, 'atrakcje.html', ctx)
 
 class AtrakcjeSingleView(View):
-    #def get(self, request):
-    #    return TemplateResponse(request, 'atrakcje-single.html')
     def get(self, request, pk):
         attr_single = get_object_or_404(Attraction, id=pk)
         tags = AttrTag.objects.all()
@@ -116,17 +180,12 @@ class AtrakcjeSingleView(View):
         }
         return TemplateResponse(request, 'atrakcje-single.html', context=context)
 
-#class AddAtractionView(CreateView):
-#    model = Attraction
-#    fields = '__all__'
-#    success_url = ("atrakcje")
-
 class AddAtrakcjeView(View):
     def get(self, request):
         form = AddAtractionForm()
         return TemplateResponse(request, 'add-atrakcje.html', context={'form':form})
     def post(self, request):
-        form = AddAtractionForm(request.POST)
+        form = AddAtractionForm(request.POST, request.FILES)
         if form.is_valid():
             attr_name = form.cleaned_data['attr_name']
             address = form.cleaned_data['address']
@@ -154,7 +213,7 @@ class EditAtrakcje(View):
         }
         return TemplateResponse(request, 'edit-atrakcje.html', ctx)
     def post(self, request, pk):
-        form = EditAtractionForm(request.POST)
+        form = EditAtractionForm(request.POST, request.FILES)
         atr = Attraction.objects.get(id=pk)
         if form.is_valid():
             atr.attr_name = form.cleaned_data['attr_name']
@@ -181,8 +240,6 @@ class AnimacjeView(View):
         return TemplateResponse(request, 'animacje.html', ctx)
 
 class AnimacjeSingleView(View):
-    # def get(self, request):
-        # return TemplateResponse(request, 'animacje-single.html')
     def get(self, request, pk):
         anim_single = get_object_or_404(Animation, id=pk)
         tags = AnimTag.objects.all()
@@ -204,7 +261,7 @@ class AddAnimacjeView(View):
         form = AddAnimationForm()
         return TemplateResponse(request, 'add-animacje.html', context={'form':form})
     def post(self, request):
-        form = AddAnimationForm(request.POST)
+        form = AddAnimationForm(request.POST, request.FILES)
         if form.is_valid():
             anim_name = form.cleaned_data['anim_name']
             address = form.cleaned_data['address']
@@ -234,7 +291,7 @@ class EditAnimacje(View):
         }
         return TemplateResponse(request, 'edit-animacje.html', ctx)
     def post(self, request, pk):
-        form = EditAnimationForm(request.POST)
+        form = EditAnimationForm(request.POST, request.FILES)
         anim = Animation.objects.get(id=pk)
         if form.is_valid():
             anim.anim_name = form.cleaned_data['anim_name']
@@ -298,9 +355,25 @@ class RegisterView(View):
                 error.append('użytkownik isnieje')
         return render(request, 'register.html', context={'form':form, 'error':error})
 
-#class ContactView(View):
-#    def get(self, request):
-#        return TemplateResponse(request, 'contact.html')
+class ResetPasswordView(View):
+    def get(self, request, pk):
+        form = ResetPasswordForm()
+        # us=request.user()
+        us = User.objects.get(id=pk)
+        return TemplateResponse(request, 'reset_password.html', context={'form': form, 'us': us})
+    def post(self, request, pk):
+        form = ResetPasswordForm(request.POST)
+        us = User.objects.get(id=pk)
+        error=[]
+        if form.is_valid():
+            us.new_password = form.cleaned_data['new_password']
+            us.new2_password = form.cleaned_data['new2_password']
+            if us.new_password == us.new2_password:
+                us.set_password(request.POST.get('new_password'))
+                us.save()
+            else:
+                error.append('Hasła są różne - oba hasła muszą być jednakowe')
+        return render(request, 'reset_password.html', context={'form':form, 'us': us, 'error':error})
 
 
 class ContactUsView(View):

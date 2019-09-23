@@ -1,8 +1,9 @@
 from django import forms
+from django.forms import ModelForm
 from django.core.validators import URLValidator, EmailValidator
 from django.core.exceptions import ValidationError
 from .models import Attraction, Animation, PEOPLE, DURATION, ZAKRES, AttrTag, AnimTag,  \
-    GeneralFoto, Wabik, Newsletter
+    GeneralFoto, Wabik, Newsletter, News, Comment, BlogTag, User
 
 def validate_two_dots(value):
     if value.count('.') <2:
@@ -102,6 +103,10 @@ class RegisterForm(forms.Form):
     email = forms.CharField(validators=[EmailValidator()])
     log_on = forms.BooleanField(label="Logowanie po rejestracji:",required=False)
 
+class ResetPasswordForm(forms.Form):
+    new_password = forms.CharField(widget=forms.PasswordInput(), label="wprowadź nowe hasło")
+    new2_password = forms.CharField(widget=forms.PasswordInput(), label="wpisz ponownie nowe hasło")
+
 class ContactUsForm(forms.Form):
     name = forms.CharField(max_length=100, label="Wpisz Twoje imię")
     email = forms.EmailField(label="Wpisz email")
@@ -126,3 +131,35 @@ class SearchAnimationForm(forms.Form):
     anim_tags = forms.ModelMultipleChoiceField(queryset= AnimTag.objects.all(), label="znajdź po tagu", required=False)
     anim_people = forms.MultipleChoiceField(widget=forms.RadioSelect, choices=PEOPLE, label="szukaj policzbę osób", required=False)
     zakres = forms.ChoiceField(widget=forms.RadioSelect, choices=ZAKRES, label="zasięg usług", required=False)
+
+class NewsAddForm(forms.ModelForm):
+        class Meta:
+            model = News
+            exclude = ['user', 'posted_date']
+
+    # title = forms.CharField(max_length=250, label="wpisz tytuł posta")
+    # content = forms.TextField(widget=forms.Textarea(), label="wpisz treść posta")
+    # foto = forms.FileField(blank=True, null=True)
+    # blog_tag = forms.ModelMultipleChoiceField(queryset=BlogTag.objects.all(), widget=forms.CheckboxSelectMultiple, label="wybierz tagi postu")
+    # user = forms.ModelChoiceField(queryset=User.objects.filter(user=username), widget=forms.HiddenInput)
+    # posted_date = forms.DateField(widget=forms.HiddenInput)
+
+class NewsEditForm(forms.Form):
+    title = forms.CharField(max_length=250, label="edytuj tytuł posta")
+    content = forms.CharField(widget=forms.Textarea(), label="edytuj treść posta")
+    foto = forms.FileField(required=False)
+    blog_tag = forms.ModelMultipleChoiceField(queryset=BlogTag.objects.all(), widget=forms.CheckboxSelectMultiple, label="edytuj tagi postu")
+    user = forms.ModelChoiceField(queryset=User.objects.all(), widget=forms.HiddenInput)
+    posted_date = forms.DateField(widget=forms.HiddenInput)
+
+# class CommentAddForm(forms.Form):
+#     text = forms.CharField(max_length=300, label="zostaw komentarz")
+#     news = forms.ModelMultipleChoiceField(queryset=News.objects.all(), on_delete=models.CASCADE, widget=forms.HiddenInput)
+#     user = forms.ModelMultipleChoiceField(queryset=User.object.filter(user=username), on_delete=models.CASCADE, widget=forms.HiddenInput)
+#     posted_date = models.DateTimeField(auto_now_add=True, widget=forms.HiddenInput)
+
+class CommentAddForm(forms.ModelForm):
+    text = forms.CharField(widget=forms.Textarea(), max_length=300, label="Treść komentarza")
+    class Meta:
+        model = Comment
+        exclude = ['news', 'user', 'posted_date']

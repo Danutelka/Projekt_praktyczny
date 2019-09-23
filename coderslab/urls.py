@@ -23,7 +23,7 @@ from datrakcje.views import StartView, AboutView, BaseView, BlogView, BlogSingle
     AtrakcjeView, AtrakcjeSingleView, AnimacjeView, AnimacjeSingleView, AddAtrakcjeView,  \
     AddAnimacjeView, AnimTagView, AttrTagView, AddAnimTagView, AddAttrTagView, AddGeneralFoto,  \
     LoginView, RegisterView, EditAtrakcje, EditAnimacje, ContactUsView, NewsletterView,  \
-    NewsletterAnswerView
+    NewsletterAnswerView, ResetPasswordView, NewsAddView, NewsEditView
     #AttractionUpdate
     #ContactView
 
@@ -36,7 +36,9 @@ urlpatterns = [
     path('newsletter', NewsletterView.as_view(), name="newsletter"),
     path('newsletter/answer', NewsletterAnswerView.as_view(), name="news-answer"),
     path('blog', BlogView.as_view(), name="blog"),
-    path('blog/single', BlogSingleView.as_view(), name="blog-single"),
+    path('blog/<int:pk>', BlogSingleView.as_view(), name="blog-single"),
+    path('blog/add', NewsAddView.as_view(), name="blog-add"),
+    path('blog/edit/<int:id>', NewsEditView.as_view(), name="blog-edit"),
     path('tagi/anim', AnimTagView.as_view(), name="tagi-animacje"),
     path('tagi/anim/add', AddAnimTagView.as_view(), name="new-anim-tag"),
     path('tagi/attr', AttrTagView.as_view(), name="tagi-atrakcje"),
@@ -53,12 +55,7 @@ urlpatterns = [
     path('foto/add', AddGeneralFoto.as_view(), name="dodaj-foto"),
     path('login', LoginView.as_view(), name="login"),
     path('register', RegisterView.as_view(), name="register"),
-    # url(
-    #     r'^newsletter/',
-    #     include(newsletter_subscriptions_urlpatterns(
-    #         backend=ModelBackend(Subscription),
-    #     )),
-    #),
+    path('reset/password/<int:pk>', ResetPasswordView.as_view(), name="reset_password")
 ] + static(settings.STATIC_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:  # new
