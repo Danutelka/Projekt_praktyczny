@@ -14,10 +14,10 @@
   				</form> {% endcomment %}
 	            <!--<li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li> -->
 	            <!--<li class="nav-item"><a href="about.html" class="nav-link">About</a></li>-->
-	            <li class="nav-item"><a href="animacje" class="nav-link">Animacje</a></li>
-	            <li class="nav-item"><a href="atrakcje" class="nav-link">Atrakcje</a></li>
-	            <li class="nav-item"><a href="blog" class="nav-link">Blog</a></li>
-				<li class="nav-item"><a href= "login" class="nav-link"><button type="submit" class="form-control btn btn-primary nav-button">Logowanie</button></a></li>
+	            <li class="nav-item"><a href="{% url 'animacje' %}" class="nav-link">Animacje</a></li>
+	            <li class="nav-item"><a href="{% url 'atrakcje' %}" class="nav-link">Atrakcje</a></li>
+	            <li class="nav-item"><a href="{% url 'blog' %}" class="nav-link">Blog</a></li>
+				<li class="nav-item"><a href= "{% url 'login' %}" class="nav-link"><button type="submit" class="form-control btn btn-primary nav-button">Logowanie</button></a></li>
 	            <!--<li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>-->
 	          </ul>
 	        </div>

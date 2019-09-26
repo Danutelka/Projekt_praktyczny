@@ -3,7 +3,7 @@ from django.forms import ModelForm
 from django.core.validators import URLValidator, EmailValidator
 from django.core.exceptions import ValidationError
 from .models import Attraction, Animation, PEOPLE, DURATION, ZAKRES, AttrTag, AnimTag,  \
-    GeneralFoto, Wabik, Newsletter, News, Comment, BlogTag, User
+    GeneralFoto, Wabik, Newsletter, News, Comment, BlogTag, User, Message
 
 def validate_two_dots(value):
     if value.count('.') <2:
@@ -117,21 +117,6 @@ class NewsletterForm(forms.Form):
     email = forms.EmailField(label="Wpisz email", max_length=150)
     is_active = forms.BooleanField(initial=False, label="Zgadzam się na przesyłanie newslettera")
 
-class SearchGeneralForm(forms.Form):
-    name = forms.CharField(label="wyszukaj")
-
-class SearchAtractionForm(forms.Form):
-    attr_name = forms.CharField(max_length=20, label="znajdź po nazwie", required=False)
-    attr_tag = forms.ModelMultipleChoiceField(queryset= AttrTag.objects.all(), label="znajdź po tagu", required=False)
-    attr_people = forms.MultipleChoiceField(widget=forms.RadioSelect, choices=PEOPLE, label="szukaj policzbę osób", required=False)
-    address = forms.CharField(label="Miejscowość:", max_length=24, required=False)
-
-class SearchAnimationForm(forms.Form):
-    anim_name = forms.CharField(max_length=20, label="znajdź po nazwie", required=False)
-    anim_tags = forms.ModelMultipleChoiceField(queryset= AnimTag.objects.all(), label="znajdź po tagu", required=False)
-    anim_people = forms.MultipleChoiceField(widget=forms.RadioSelect, choices=PEOPLE, label="szukaj policzbę osób", required=False)
-    zakres = forms.ChoiceField(widget=forms.RadioSelect, choices=ZAKRES, label="zasięg usług", required=False)
-
 class NewsAddForm(forms.ModelForm):
         class Meta:
             model = News
@@ -163,3 +148,27 @@ class CommentAddForm(forms.ModelForm):
     class Meta:
         model = Comment
         exclude = ['news', 'user', 'posted_date']
+
+class SearchGeneralForm(forms.Form):
+    name = forms.CharField(label="wyszukaj")
+
+class SearchForm(forms.Form):
+    name = forms.CharField(label="wyszukaj")
+
+class SearchAtractionForm(forms.Form):
+    attr_name = forms.CharField(max_length=20, label="znajdź po nazwie", required=False)
+    attr_tag = forms.ModelMultipleChoiceField(queryset= AttrTag.objects.all(), label="znajdź po tagu", required=False)
+    attr_people = forms.MultipleChoiceField(widget=forms.RadioSelect, choices=PEOPLE, label="szukaj policzbę osób", required=False)
+    address = forms.CharField(label="Miejscowość:", max_length=24, required=False)
+
+class SearchAnimationForm(forms.Form):
+    anim_name = forms.CharField(max_length=20, label="znajdź po nazwie", required=False)
+    anim_tags = forms.ModelMultipleChoiceField(queryset= AnimTag.objects.all(), label="znajdź po tagu", required=False)
+    anim_people = forms.MultipleChoiceField(widget=forms.RadioSelect, choices=PEOPLE, label="szukaj policzbę osób", required=False)
+    zakres = forms.ChoiceField(widget=forms.RadioSelect, choices=ZAKRES, label="zasięg usług", required=False)
+
+class MessageForm(forms.Form):
+    msg_content = forms.CharField(widget=forms.Textarea(), label="Treść wiadomości")
+    class Meta:
+        model = Message
+        exclude = ['sender', 'sent']

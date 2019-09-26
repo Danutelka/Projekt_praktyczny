@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}message{% endblock %}
+
+{% block content %}
+    <div class="hero-wrap js-fullheight" style="background-image: url({% static '/images/bg_animacje.jpg' %});">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center" data-scrollax-parent="true">
+          <div class="col-md-9 text-center ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
+            <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Animacje</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <form method="POST">
+        {% csrf_token %}
+            {{ sender.username }}
+            {{ form.as_p }}
+            <input type="submit" name="submit" value="Wyślij" />
+    </form>
+    {% comment %} <a href="{% url 'messages_inbox' %}">Cancelar</a><br/> {% endcomment %}
+{% endblock %}

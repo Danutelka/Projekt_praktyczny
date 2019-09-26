@@ -1,31 +1,45 @@
 {% extends  'base.html'%}
+{% load static %}
+
+{% block title %}sarch-answer{% endblock %}
 
 {% block content %}
+    <div class="hero-wrap js-fullheight" style="background-image: url({% static '/images/bg_contact1.jpg' %});">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center" data-scrollax-parent="true">
+          <div class="col-md-9 text-center ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
+            <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Newsletter</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <form method="POST">
         {% csrf_token %}
         {{ form }}
         <input type="submit" value="szukaj">
     </form>
-    {% if product is not None%}
-        {% if product.count > 0 %}
+    {% if atrakcje1 is not None%}
+        {% if atrakcje1.count > 0 %}
             <ul>
-                {% for s in product %}
-                <li>{{ s.name }} {{ s.price }} {{ s.description }}</li>
+                {% for s in atrakcje1 %}
+                <li>{{ s.attr_name }} {{ s.attr_tags }} {{ s.description }}</li>
                 {% endfor %}
             </ul>
         {% else %}
-            <p> Nie znaleziono dopasowań w produktach</p>
+            <p> Nie znaleziono dopasowań</p>
         {% endif %}
     {% endif %}
-    {% if category is not None%}
-        {% if category.count > 0 %}
+    {% comment %} {% if atrakcje2 is not None%}
+        {% if atrakcje2.count > 0 %}
             <ul>
-                {% for s in category %}
-                <li>{{ s.category_name }} {{ s.slug }}</li>
+                {% for s in atrakcje2 %}
+                <li>{{ s.attr_name }} {{ s.attr_tags }} {{ s.description }}</li>
                 {% endfor %}
             </ul>
         {% else %}
-            <p> Nie znaleziono dopasowań w kategoriach</p>
+            <p> Nie znaleziono dopasowań</p>
         {% endif %}
-    {% endif %}
+    {% endif %} {% endcomment %}
 {% endblock %}

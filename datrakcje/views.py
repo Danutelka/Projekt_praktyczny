@@ -13,16 +13,18 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.signing import BadSignature
 from django.conf import settings
 import django.contrib.auth.decorators
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Permission
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.conf.urls.static import static
 from django.core.mail import send_mail
 from .models import Attraction, Animation, PEOPLE, AGE, DURATION, ZAKRES, AnimTag, AttrTag, GeneralFoto,  \
-    Wabik, Newsletter, BlogTag, News, Comment
+    Wabik, Newsletter, BlogTag, News, Comment, Message
 from .forms import AddAtractionForm, AddAnimationForm, AddAttrTagForm, AddAnimTagForm,  \
     AddGeneralFotoForm, LoginForm, RegisterForm, SearchGeneralForm, EditAtractionForm, EditAnimationForm,  \
-    ContactUsForm, NewsletterForm, ResetPasswordForm, NewsAddForm, NewsEditForm, CommentAddForm
+    ContactUsForm, NewsletterForm, ResetPasswordForm, NewsAddForm, NewsEditForm, CommentAddForm,  \
+    MessageForm
 # Create your views here.
 
 class BaseView(View):
@@ -76,7 +78,9 @@ class BlogSingleView(View):
             return HttpResponseRedirect('blog/<int:id>')
         return TemplateResponse(request, 'blog-single.html', context=context)
 
-class NewsAddView(View):
+#@login_required
+class NewsAddView(PermissionRequiredMixin, View):
+    permission_required = "auth.add_news"
     def get(self, request):
         form = NewsAddForm()
         return TemplateResponse(request, 'blog-add.html', context={'form': form})
@@ -90,7 +94,9 @@ class NewsAddView(View):
             News.objects.create(title=title, content=content, foto=foto, blog_tag=blog_tag)
             return HttpResponseRedirect('blog')
 
-class NewsEditView(View):
+#@login_required
+class NewsEditView(PermissionRequiredMixin, View):
+    permission_required ="auth.change_news"
     def get(self, request, pk):
         form = NewsEditForm()
         new = News.objects.get(id=pk)
@@ -102,6 +108,7 @@ class NewsEditView(View):
     def post(self, request, pk):
         form = NewsEditForm(request.POST, request.FILES)
         new = News.objects.get(id=pk)
+        #p.first_name = request.POST.get('first_name')
         if form.is_valid():
             new.title = form.cleaned_data['title']
             new.content = form.cleaned_data['content']
@@ -116,7 +123,9 @@ class AttrTagView(View):
         attrtag = AttrTag.objects.all()
         return TemplateResponse(request, 'attr-tags.html', context={"attrtag": attrtag})
 
-class AddAttrTagView(View):
+#@login_required
+class AddAttrTagView(PermissionRequiredMixin, View):
+    permission_required = "auth.add_attrtag"
     def get(self, request):
         form = AddAttrTagForm()
         return TemplateResponse(request, 'add-attr-tag.html', context={'form': form})
@@ -132,7 +141,9 @@ class AnimTagView(View):
         animtag = AnimTag.objects.all()
         return TemplateResponse(request, 'anim-tags.html', context={"animtag": animtag})
 
-class AddAnimTagView(View):
+#@login_required
+class AddAnimTagView(PermissionRequiredMixin, View):
+    permission_required = "auth.add_animtag"
     def get(self, request):
         form = AddAnimTagForm()
         return TemplateResponse(request, 'add-anim-tags.html', context={"form": form})
@@ -143,7 +154,9 @@ class AddAnimTagView(View):
             AnimTag.objects.create(anim_tag=anim_tag)
             return HttpResponseRedirect('tagi/anim')
 
-class AddGeneralFoto(View):
+#@login_required
+class AddGeneralFoto(PermissionRequiredMixin, View):
+    permission_required = "auth.add_generalfoto"
     def get(self, request):
         form = AddGeneralFotoForm()
         return TemplateResponse(request, 'add-general-foto.html', context={"form": form})
@@ -166,7 +179,7 @@ class AtrakcjeView(View):
 class AtrakcjeSingleView(View):
     def get(self, request, pk):
         attr_single = get_object_or_404(Attraction, id=pk)
-        tags = AttrTag.objects.all()
+       #tags = AttrTag.objects.all()
         fotos = GeneralFoto.objects.all()
         wabik = Wabik.objects.all()
         context ={
@@ -174,13 +187,15 @@ class AtrakcjeSingleView(View):
             "people": PEOPLE,
             "age": AGE,
             "duration": DURATION,
-            "tags" : tags,
+        #    "tags" : tags,
             "fotos": fotos,
             "wabik": wabik
         }
         return TemplateResponse(request, 'atrakcje-single.html', context=context)
 
-class AddAtrakcjeView(View):
+#@login_required
+class AddAtrakcjeView(PermissionRequiredMixin, View):
+    permission_required = "auth.add_attraction"
     def get(self, request):
         form = AddAtractionForm()
         return TemplateResponse(request, 'add-atrakcje.html', context={'form':form})
@@ -203,7 +218,9 @@ class AddAtrakcjeView(View):
                 attr_price=attr_price, attr_duration=attr_duration, attr_www=attr_www, attr_wabik=attr_wabik)
             return HttpResponseRedirect("atrakcje")
 
-class EditAtrakcje(View):
+#@login_required
+class EditAtrakcje(PermissionRequiredMixin, View):
+    permission_required = "auth.change_attraction"
     def get(self, request, pk):
         form = EditAtractionForm()
         atr = Attraction.objects.get(id=pk)
@@ -242,21 +259,23 @@ class AnimacjeView(View):
 class AnimacjeSingleView(View):
     def get(self, request, pk):
         anim_single = get_object_or_404(Animation, id=pk)
-        tags = AnimTag.objects.all()
-        fotos = GeneralFoto.objects.all()
-        wabik = Wabik.objects.all()
+        #tags = AnimTag.objects.all()
+        #fotos = GeneralFoto.objects.all()
+        #wabik = Wabik.objects.all()
         context ={
             "anim_single": anim_single,
             "people": PEOPLE,
             "age": AGE,
             "duration": DURATION,
-            "tags": tags,
-            "fotos": fotos,
-            "wabik": wabik
+        #    "tags": tags,
+        #    "fotos": fotos,
+        #    "wabik": wabik
         }
         return TemplateResponse(request, 'animacje-single.html', context=context)
 
-class AddAnimacjeView(View):
+#@login_required
+class AddAnimacjeView(PermissionRequiredMixin, View):
+    permission_required = "auth.add_animation"
     def get(self, request):
         form = AddAnimationForm()
         return TemplateResponse(request, 'add-animacje.html', context={'form':form})
@@ -281,7 +300,9 @@ class AddAnimacjeView(View):
                 anim_www=anim_www, anim_wabik=anim_wabik)
             return HttpResponseRedirect("animacje")
 
-class EditAnimacje(View):
+#@login_required
+class EditAnimacje(PermissionRequiredMixin, View):
+    permission_required = "auth.change_animation"
     def get(self, request, pk):
         form = EditAnimationForm()
         anim = Animation.objects.get(id=pk)
@@ -327,9 +348,18 @@ class LoginView(View):
                 return TemplateResponse(request, 'bad-login.html')
         return render(request, 'login.html', context={'form':form})
 
-def user_logout(request):
-    logout(request)
-    return redirect('/index')
+class LogoutView(View):
+    def get(self, request, pk):
+        user = get_object_or_404(User, id=pk)
+        return TemplateResponse(request, 'logout.html', context={'user': user})
+    def post(self, request, pk):
+        user = get_object_or_404(User, id=pk)
+        if user is not None:
+            logout(request)
+            return HttpResponseRedirect('index')
+        else:
+            return TemplateResponse(request, 'logout.html', context={'user': user})
+        
 
 class RegisterView(View):
     def get(self, request):
@@ -355,6 +385,7 @@ class RegisterView(View):
                 error.append('użytkownik isnieje')
         return render(request, 'register.html', context={'form':form, 'error':error})
 
+#@login_required ????
 class ResetPasswordView(View):
     def get(self, request, pk):
         form = ResetPasswordForm()
@@ -416,51 +447,109 @@ class NewsletterAnswerView(View):
         def get(self, request):
             return TemplateResponse(request, 'news-answer.html')
 
+# szukaczka
+
 class SearchAttractionView(View):
     def get(self, request):
-        form = SearchAttractionForm()
-        return TemplateResponse(request, 'search-attr.html', context={'form': form})
+        form = SearchGeneralForm()
+        return TemplateResponse(request, 'search_attr.html', context={'form': form})
     def post(self, request):
-        form = SearchAttractionForm(request.POST)
+        form = SearchGeneralForm(request.POST)
         if form.is_valid():
-            attr_name = form.cleaned_data['attr_name']
-            attr_tag = form.cleaned_data['attr_tag']
-            attr_people = form.cleaned_data['attr_people']
-            address = form.cleaned_data['address']
-            atrakcje1 = Attraction.objects.filter(attr_name__icontains=attr_name)
-            atrakcje2 = Attraction.objects.filter(attr_tag__icontains=attr_tag)
-            atrakcje3 = Attraction.objects.filter(attr_people__icontains=attr_people)
-            atrakcje4 = Attraction.objects.filter(address__icontains=address)
+            name = form.cleaned_data['name']
+            atrakcje1 = Attraction.objects.filter(attr_name__icontains=name)
+            #atrakcje2 = Attraction.objects.filter(attr_tag__icontains=name)
             context = {
                 "form": form,
                 "atrakcje1": atrakcje1,
-                "atrakcje2": atrakcje2,
-                "atrakcje3": atrakcje3,
-                "atrakcje4": atrakcje4
+                #"atrakcje2": atrakcje2
             }
-        return TemplateResponse(request, "search-attr.html", context=context)
+        return TemplateResponse(request, "search_attr.html", context=context)
 
-class SearchAttractionView(View):
+# class SearchAttractionView(View):
+#     def get(self, request):
+#         form = SearchAnimationForm()
+#         return TemplateResponse(request, 'search-anim.html', context={'form': form})
+#     def post(self, request):
+#         form = SearchAnimationForm(request.POST)
+#         if form.is_valid():
+#             anim_name = form.cleaned_data['anim_name']
+#             anim_tags = form.cleaned_data['anim_tags']
+#             anim_people = form.cleaned_data['anim_people']
+#             zakres = form.cleaned_data['zakres']
+#             animacje1 = Animation.objects.filter(anim_name__icontains=anim_name)
+#             animacje2 = Animation.objects.filter(anim_tags__icontains=anim_tags)
+#             animacje3 = Animation.objects.filter(anim_people__icontains=anim_people)
+#             animacje4 = Animation.objects.filter(zakres__icontains=zakres)
+#             context = {
+#                 "form": form,
+#                 "animacje1": animacje1,
+#                 "animacje2": animacje2,
+#                 "animacje3": animacje3,
+#                 "animacje4": animacje4
+#             }
+#         return TemplateResponse(request, "search-anim.html", context=context)
+
+class SearchAnimationView(View):
     def get(self, request):
-        form = SearchAnimationForm()
-        return TemplateResponse(request, 'search-anim.html', context={'form': form})
+        form = SearchGeneralForm()
+        return TemplateResponse(request, 'search_anim.html', context={'form': form})
     def post(self, request):
-        form = SearchAnimationForm(request.POST)
+        form = SearchGeneralForm(request.POST)
         if form.is_valid():
-            anim_name = form.cleaned_data['anim_name']
-            anim_tags = form.cleaned_data['anim_tags']
-            anim_people = form.cleaned_data['anim_people']
-            zakres = form.cleaned_data['zakres']
-            animacje1 = Animation.objects.filter(anim_name__icontains=anim_name)
-            animacje2 = Animation.objects.filter(anim_tags__icontains=anim_tags)
-            animacje3 = Animation.objects.filter(anim_people__icontains=anim_people)
-            animacje4 = Animation.objects.filter(zakres__icontains=zakres)
+            name = form.cleaned_data['name']
+            animacje1 = Animation.objects.filter(anim_name__icontains=name)
+            #atrakcje2 = Attraction.objects.filter(attr_tag__icontains=name)
             context = {
                 "form": form,
                 "animacje1": animacje1,
-                "animacje2": animacje2,
-                "animacje3": animacje3,
-                "animacje4": animacje4
+                #"atrakcje2": atrakcje2
             }
-        return TemplateResponse(request, "search-anim.html", context=context)
+        return TemplateResponse(request, "search_anim.html", context=context)
 
+class SearchBlogView(View):
+    def get(self, request):
+        form = SearchGeneralForm()
+        return TemplateResponse(request, 'search_blog.html', context={'form': form})
+    def post(self, request):
+        form = SearchGeneralForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            blog1 = News.objects.filter(title__icontains=name)
+            blog2 = News.objects.filter(content__icontains=name)
+            context = {
+                "form": form,
+                "blog1": blog1,
+                "blog2": blog2
+            }
+        return TemplateResponse(request, "search_blog.html", context=context)
+
+#@login_required
+class ComposeMessageView(PermissionRequiredMixin, View):
+    permission_required = "auth.add_message"
+    def get(self, request, pk):
+        form = MessageForm()
+        sender = User.objects.get(id=pk)
+        return TemplateResponse(request, 'new-message.html', context={'form': form, 'sender': sender})
+    def post(self, request, pk):
+        form = MessageForm(request.POST)
+        sender = User.objects.get(id=pk)
+        if form.is_valid():
+            receiver = form.cleaned_data['receiver']
+            msg_content = form.cleaned_data['msg_content']
+            Message.objects.create(receiver=receiver, msg_content=msg_content)
+            return HttpResponseRedirect("profile/<int:pk>")
+
+#@login_required
+class MessageAllView(View):
+    def get(self, request):
+        messageall = Message.objects.all()
+        return TemplateResponse(request, 'messages.html', context={'messageall': messageall})
+
+#@login_required
+class ProfileView(View):
+    def get(self, request, pk):
+        user = User.objects.get(id=pk)
+        inbox = Message.objects.filter(receiver=user)
+        sent = Message.objects.filter(sender=user)
+        return TemplateResponse(request, 'profile.html', context={'user': user, 'inbox': inbox, 'sent': sent})

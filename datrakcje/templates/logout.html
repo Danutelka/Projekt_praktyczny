@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+
+	{% block title %}logout{% endblock %}
+	{% block content %}
+
+    <div class="hero-wrap js-fullheight" style="background-image: url({% static '/images/bg_profil.jpg' %});">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center" data-scrollax-parent="true">
+          <div class="col-md-9 text-center ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
+            <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Profil</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section class="ftco-section contact-section ftco-degree-bg">
+      <div class="container">
+        <div class="row d-flex mb-5 contact-info">
+          <div class="col-md-12 mb-4">
+            <h2 class="h4">Zostałeś wylogowany!</h2>
+          </div>
+        </div>
+        <div class="form-group">
+            <span class="ml-auto"><a href="index">Home</a></span>
+        </div>
+      </div>
+    </section>
+
+    {% endblock %}

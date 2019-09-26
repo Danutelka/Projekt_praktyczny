@@ -23,7 +23,8 @@ from datrakcje.views import StartView, AboutView, BaseView, BlogView, BlogSingle
     AtrakcjeView, AtrakcjeSingleView, AnimacjeView, AnimacjeSingleView, AddAtrakcjeView,  \
     AddAnimacjeView, AnimTagView, AttrTagView, AddAnimTagView, AddAttrTagView, AddGeneralFoto,  \
     LoginView, RegisterView, EditAtrakcje, EditAnimacje, ContactUsView, NewsletterView,  \
-    NewsletterAnswerView, ResetPasswordView, NewsAddView, NewsEditView
+    NewsletterAnswerView, ResetPasswordView, NewsAddView, NewsEditView, SearchAttractionView,  \
+    ComposeMessageView, ProfileView, SearchAnimationView, LogoutView
     #AttractionUpdate
     #ContactView
 
@@ -54,8 +55,13 @@ urlpatterns = [
     path('animacje/edit/<int:pk>', EditAnimacje.as_view(), name="edit-animacje"),
     path('foto/add', AddGeneralFoto.as_view(), name="dodaj-foto"),
     path('login', LoginView.as_view(), name="login"),
+    path('logout/<int:pk>', LogoutView.as_view(), name="userlogout"),
     path('register', RegisterView.as_view(), name="register"),
-    path('reset/password/<int:pk>', ResetPasswordView.as_view(), name="reset_password")
+    path('reset/password/<int:pk>', ResetPasswordView.as_view(), name="reset_password"),
+    path('search1', SearchAttractionView.as_view(), name="search-atrakcje"),
+    path('search2', SearchAnimationView.as_view(), name="search-animacje"),
+    path('message/<int:pk>', ComposeMessageView.as_view(), name="add-message"),
+    path('profile/<int:pk>', ProfileView.as_view(), name="profil")
 ] + static(settings.STATIC_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:  # new

@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.models import User
 from django.contrib.admin import ModelAdmin
 from .models import Attraction, Animation, AttrTag, AnimTag, GeneralFoto, Wabik, Newsletter,  \
-    BlogTag, News, Comment
+    BlogTag, News, Comment, Message
 
 # Register your models here.
 @admin.register(Attraction)
@@ -20,6 +20,10 @@ class NewsAdmin(admin.ModelAdmin):
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
     exclude =['news', 'user', 'posted_date']
+
+@admin.register(Message)
+class MessageAdmin(admin.ModelAdmin):
+    exclude = ['sent']
 
 admin.site.register(AttrTag)
 admin.site.register(AnimTag)
