@@ -15,10 +15,14 @@
       </div>
     </div>
 
+<!---->
 
     {% if request.user.is_authenticated %}
-        <p>username: {{ request.user.username }}</p>
+        {% comment %} <p>username: {{ request.user.username }}</p> {% endcomment %}
         {% comment %} <p><a href ="{% url 'logout/<int:pk>' pk=pk %}"> Wyloguj</a> </p> {% endcomment %}
+            <section class="profil">
+            <h2>Twoje wiadomości</h2>
+                <h3>Skrzynka odbiorcza</h3>
             {% if inbox is not None %}
                 {% if inbox.count > 0 %}
                     <ul>
@@ -30,6 +34,7 @@
                     <p> Nie masz żadnych wiadomości przychodzących</p>
                 {% endif %}
             {% endif %}
+                <h3>Wysłane wiadomości</h3>
             {% if sent is not None %}
                 {% if sent.count > 0 %}
                     <ul>
@@ -41,9 +46,36 @@
                     <p> Nie wysłałeś żadnych wiadmości </p>
                 {% endif %}
             {% endif %}
+            <h2>Twoje atrakcje</h2>
+            {% if atrakcje is not None %}
+                {% if atrakcje.count > 0 %}
+                    <ul>
+                    {% for s in atrakcje %}
+                        <li>{{ s.attr_name }}</li>
+                    {% endfor %}
+                    </ul>
+                {% else %}
+                    <p> Nie dodałeś żadnych atrakcji</p>
+                {% endif %}
+            {% endif %}
+            <h2>Twoje animacje</h2>
+            {% if animacje is not None %}
+                {% if animacje.count > 0 %}
+                    <ul>
+                    {% for s in animacje %}
+                        <li>{{ s.anim_name }}</li>
+                    {% endfor %}
+                    </ul>
+                {% else %}
+                    <p> Nie dodałeś żadnych atrakcji</p>
+                    </section>
+                {% endif %}
+            {% endif %}
     {% else %}
-        <p>Użytkownik niezalogowany</p>
+    <section class="profil">
+        <h2>Użytkownik niezalogowany</h2>
         <p><a href="{% url 'login' %}">Zaloguj się</a></p>
+    </section>
     {% endif %} 
 
     {% comment %} <p>username: {{ user.username }}</p> {% endcomment %}

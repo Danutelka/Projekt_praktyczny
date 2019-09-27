@@ -114,17 +114,20 @@
           			</div>
           		</div>
           		<div class="col-md-12 hotel-single mt-4 mb-5 ftco-animate">
-					  <span>{{ anim_single.anim_tags }}</span>
+				  	{% for x in tagi %}
+					  <p>Tagi:</p>
+					  <span class="tagi">{{ x.anim_tag }}</span>
+					{% endfor %}
           			<h2>{{ anim_single.anim_name }}</h2>
           			<p class="rate mb-5">
           				<span class="loc"><a href="#"><i class="icon-map"></i> {{anim_single.address}} </a></span>
-          				<span class="star">
+          				{% comment %} <span class="star">
     							<i class="icon-star"></i>
     							<i class="icon-star"></i>
     							<i class="icon-star"></i>
     							<i class="icon-star"></i>
     							<i class="icon-star-o"></i>
-    							Ocena</span>
+    							Ocena</span> {% endcomment %}
     						</p>
     						<p>{{ anim_single.description }}</p>
     						<div class="d-md-flex mt-5 mb-5">
@@ -139,7 +142,8 @@
 	    							<li><b>Strona www:</b> <a href="">{{ anim_single.anim_www }}</a></li>
 	    						</ul>
     						</div>
-    						<p>{{ attr_single.rules }}</p>
+    						<p>{{ anim_single.rules }}</p>
+							<p class="card-text">Likes: <span class="oceny">{{ anim_single.num_vote_up }}</span> Dislikes: <span class="oceny">{{ anim_single.num_vote_down }}</span> Oceny: <span class="oceny">{{ anim_single.vote_score }}</span> </p
 
 	<!--wabik-->
 
@@ -239,7 +243,7 @@
 
 	<!---->
           		<div class="col-md-12 hotel-single ftco-animate mb-5 mt-4">
-          			<h4 class="mb-5">Napisz do nas &amp; Zapyta</h4>
+          			<h4 class="mb-5">Napisz do nas &amp; Zapytaj</h4>
           			<div class="fields">
           				<div class="row">
           					<div class="col-md-6">

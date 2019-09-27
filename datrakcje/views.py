@@ -53,12 +53,14 @@ class BlogSingleView(View):
     def get(self, request, pk):
         news_single = get_object_or_404(News, id=pk)
         comments = Comment.objects.filter(news_id=news_single)
-        tags = BlogTag.objects.all()
+        #tags = BlogTag.objects.all()
+        tagi = news_single.blog_tag.all()
         form = CommentAddForm()
         context ={
             "news_single": news_single,
             "comments": comments,
-            "tags": tags,
+            #"tags": tags,
+            "tagi": tagi,
             "form": form
         }
         return TemplateResponse(request, 'blog-single.html', context=context)
@@ -117,7 +119,6 @@ class NewsEditView(PermissionRequiredMixin, View):
             new.save()
             return HttpResponseRedirect("blog")
 
-
 class AttrTagView(View):
     def get(self, request):
         attrtag = AttrTag.objects.all()
@@ -170,15 +171,17 @@ class AddGeneralFoto(PermissionRequiredMixin, View):
 
 class AtrakcjeView(View):
     def get(self, request):
-        attraction = Attraction.objects.all()
+        attraction = Attraction.objects.all().order_by('-created')
         ctx = {
-            "attraction" : attraction
+            "attraction" : attraction,
         }
         return TemplateResponse(request, 'atrakcje.html', ctx)
 
 class AtrakcjeSingleView(View):
     def get(self, request, pk):
         attr_single = get_object_or_404(Attraction, id=pk)
+        tagi = attr_single.attr_tags.all()
+        #attraction_tags = Attraction.attr_tags.values_list('pk', flat=True)
        #tags = AttrTag.objects.all()
         fotos = GeneralFoto.objects.all()
         wabik = Wabik.objects.all()
@@ -189,7 +192,9 @@ class AtrakcjeSingleView(View):
             "duration": DURATION,
         #    "tags" : tags,
             "fotos": fotos,
-            "wabik": wabik
+            "wabik": wabik,
+            "tagi": tagi
+        #    "attraction_tags": attraction_tags
         }
         return TemplateResponse(request, 'atrakcje-single.html', context=context)
 
@@ -250,7 +255,7 @@ class EditAtrakcje(PermissionRequiredMixin, View):
 
 class AnimacjeView(View):
     def get(self, request):
-        animation = Animation.objects.all()
+        animation = Animation.objects.all().order_by('-created')
         ctx = {
             "animation": animation
         }
@@ -259,6 +264,7 @@ class AnimacjeView(View):
 class AnimacjeSingleView(View):
     def get(self, request, pk):
         anim_single = get_object_or_404(Animation, id=pk)
+        tagi = anim_single.anim_tags.all()
         #tags = AnimTag.objects.all()
         #fotos = GeneralFoto.objects.all()
         #wabik = Wabik.objects.all()
@@ -267,6 +273,7 @@ class AnimacjeSingleView(View):
             "people": PEOPLE,
             "age": AGE,
             "duration": DURATION,
+            "tagi": tagi
         #    "tags": tags,
         #    "fotos": fotos,
         #    "wabik": wabik
@@ -543,13 +550,22 @@ class ComposeMessageView(PermissionRequiredMixin, View):
 #@login_required
 class MessageAllView(View):
     def get(self, request):
-        messageall = Message.objects.all()
+        messageall = Message.objects.all().order_by('-sent')
         return TemplateResponse(request, 'messages.html', context={'messageall': messageall})
 
 #@login_required
 class ProfileView(View):
     def get(self, request, pk):
         user = User.objects.get(id=pk)
-        inbox = Message.objects.filter(receiver=user)
-        sent = Message.objects.filter(sender=user)
-        return TemplateResponse(request, 'profile.html', context={'user': user, 'inbox': inbox, 'sent': sent})
+        inbox = Message.objects.filter(receiver=user).order_by('-sent')
+        sent = Message.objects.filter(sender=user).order_by('-sent')
+        atrakcje = Attraction.objects.filter(user=user).order_by('-created')
+        animacje = Animation.objects.filter(user=user).order_by('-created')
+        context = {
+            "user": user,
+            "inbox": inbox,
+            "sent": sent,
+            "atrakcje": atrakcje,
+            "animacje": animacje
+            }
+        return TemplateResponse(request, 'profile.html', context=context)

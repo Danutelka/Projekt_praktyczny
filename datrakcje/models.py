@@ -1,5 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
+from vote.models import VoteModel
+#from votes.managers import VotableManager
+
 #from newsletter_subscription.models import SubscriptionBase
 
 # Create your models here.
@@ -72,7 +75,7 @@ class Wabik(models.Model):
     wabik_info = models.CharField(max_length=150, blank=True, null=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE, blank=True, null=True)
 
-class Attraction(models.Model):
+class Attraction(VoteModel, models.Model):
     attr_name = models.CharField(max_length=128)
     address = models.CharField(max_length=64)
     attr_rating = models.IntegerField()
@@ -96,7 +99,7 @@ class Attraction(models.Model):
     def __str__(self):
         return "{}" .format(self.attr_name)
 
-class Animation(models.Model):
+class Animation(VoteModel, models.Model):
     anim_name = models.CharField(max_length=128)
     address = models.CharField(max_length=64)
     zakres = models.IntegerField(choices=ZAKRES)
@@ -135,7 +138,7 @@ class BlogTag(models.Model):
     def __str__(self):
         return "{}" .format(self.blog_tag)
 
-class News(models.Model):
+class News(VoteModel, models.Model):
     title = models.CharField(max_length=250)
     content = models.TextField()
     foto = models.FileField(upload_to="media/blog", blank=True, null=True)

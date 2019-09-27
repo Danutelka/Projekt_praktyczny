@@ -114,17 +114,20 @@
           			</div>
           		</div> 
           		<div class="col-md-12 hotel-single mt-4 mb-5 ftco-animate">
-          			<span>{{ attr_single.attr_tags }}</span>
+				  <p>Tagi: </p>
+				  	{% for x in tagi %}
+          			<span class="tagi">{{ x.attr_tag }}</span>
+					{% endfor %}
           			<h2>{{ attr_single.attr_name }}</h2>
           			<p class="rate mb-5">
           				<span class="loc"><a href="#"><i class="icon-map"></i> {{attr_single.address}} </a></span>
-          				<span class="star">
+          				{% comment %} <span class="star">
     							<i class="icon-star"></i>
     							<i class="icon-star"></i>
     							<i class="icon-star"></i>
     							<i class="icon-star"></i>
     							<i class="icon-star-o"></i>
-    							<span>Ocena</span>
+    							<span>Ocena</span> {% endcomment %}
     						</p>
     						<p> {{ attr_single.description }}</p>
     						<div class="d-md-flex mt-5 mb-5">
@@ -140,6 +143,7 @@
 	    						</ul>
     						</div>
     						<p>{{ attr_single.rules }}</p>
+							<p class="card-text">Likes: <span class="oceny">{{ attr_single.num_vote_up }}</span> Dislikes: <span class="oceny">{{ attr_single.num_vote_down }}</span> Oceny: <span class="oceny">{{ attr_single.vote_score }}</span> </p
           		</div>
 			
           		<div class="col-md-12 hotel-single ftco-animate mb-5 mt-4">

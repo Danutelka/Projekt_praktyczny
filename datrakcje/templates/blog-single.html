@@ -106,12 +106,15 @@
               <p>{{ news_single.content }}</p>
               <p><img src="{{ news_single.foto }}" alt="" class="img-fluid"></p>
               <div class="tagcloud">
-                <a href="#" class="tag-cloud-link">{{ news_single.blog_tag }}</a>
+                {% for x in tagi %}
+                  <p>{{ x.blog_tag }}</p>
+                {% endfor %}
                 <!--<a href="#" class="tag-cloud-link">Sport</a>
                 <a href="#" class="tag-cloud-link">Tech</a>
                 <a href="#" class="tag-cloud-link">Travel</a>-->
               </div>
-              <span> Autor: {{ news_single.user }} opublikowano: {{ news_single.posted_date }}</span>
+              <span> Autor: <span class="tagi">{{ news_single.user }}</span> opublikowano: <span class="tagi">{{ news_single.posted_date }}</span></span>
+              <p class="card-text">Likes: <span class="oceny">{{ news_single.num_vote_up }}</span> Dislikes: <span class="oceny">{{ news_single.num_vote_down }}</span> Oceny: <span class="oceny">{{ news_single.vote_score }}</span> </p>
           </div>
         </div>
       </div>

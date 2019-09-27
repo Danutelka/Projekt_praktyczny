@@ -48,7 +48,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'bootstrap',
     'fontawesome',
-    'datrakcje'
+    'datrakcje',
+    'vote'
 ]
 
 MIDDLEWARE = [

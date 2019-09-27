@@ -17,8 +17,13 @@
 	            <li class="nav-item"><a href="{% url 'animacje' %}" class="nav-link">Animacje</a></li>
 	            <li class="nav-item"><a href="{% url 'atrakcje' %}" class="nav-link">Atrakcje</a></li>
 	            <li class="nav-item"><a href="{% url 'blog' %}" class="nav-link">Blog</a></li>
-				<li class="nav-item"><a href= "{% url 'login' %}" class="nav-link"><button type="submit" class="form-control btn btn-primary nav-button">Logowanie</button></a></li>
-	            <!--<li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>-->
+				{% if request.user.is_authenticated %}
+					<li class="nav-item"><a href="#" class="nav-link"><button type="submit" class="form-control btn btn-primary nav-button">Użytkownik: <b>{{ request.user.username }}</b> </button></a></li>
+					{% comment %} <li class="nav-item"><a href="{% url 'profile/{{ request.user.id}}' %}" class="nav-link"><button type="submit" class="form-control btn btn-primary nav-button">Twój profil</button></a></li> {% endcomment %}
+				{% else %}
+					<li class="nav-item"><a href= "{% url 'login' %}" class="nav-link"><button type="submit" class="form-control btn btn-primary nav-button">Logowanie</button></a></li>
+	            {% endif %}
+				<!--<li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>-->
 	          </ul>
 	        </div>
 	      </div>

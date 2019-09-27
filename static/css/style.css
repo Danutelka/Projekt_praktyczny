@@ -72,7 +72,7 @@ hr {
   box-sizing: content-box;
   height: 0;
   overflow: visible; }
-
+  
 h1, h2, h3, h4, h5, h6 {
   margin-top: 0;
   margin-bottom: 0.5rem; }
@@ -2817,6 +2817,10 @@ input[type="button"].btn-block {
     position: absolute;
     clip: rect(0, 0, 0, 0);
     pointer-events: none; }
+
+.profil {
+  padding: 92px;
+}
 
 .input-group {
   position: relative;
@@ -7333,11 +7337,29 @@ a {
     color: #ed177a;
     outline: none !important; }
 
-h1, h2, h3, h4, h5,
-.h1, .h2, .h3, .h4, .h5 {
+h1, h2, h4, h5,
+.h1, .h2, .h4, .h5 {
   line-height: 1.5;
-  color: rgba(0, 0, 0, 0.8);
+  color: rgb(237, 23, 122);
   font-weight: 400; }
+
+h3, .h3 {
+  color: rgba(11, 195, 210);
+  font-size: 1.3rem !important;
+}
+
+.oceny {
+  color: #0f2b3a;
+  font-size: 28px !important;
+  font-weight: 400;
+  padding: 0 9px 1px 3px;
+}
+.tagi {
+  color: #0f2b3a;
+  font-size: 18px !important;
+  font-weight: 400;
+  padding: 0 9px 1px 3px;
+}
 
 .text-primary {
   color: #ed177a !important; }
