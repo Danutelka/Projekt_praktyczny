@@ -27,7 +27,7 @@
                 {% if inbox.count > 0 %}
                     <ul>
                     {% for s in inbox %}
-                        <li>{{ s.id }} {{ s.receiver }} {{ s.msg_content }} {{ s.sent }}</li>
+                        <li>Wiadomość do: <span class="tagi">{{ s.receiver }}</span> Otrzymano: <span class="tagi">{{ s.sent }}</span></li>
                     {% endfor %}
                     </ul>
                 {% else %}
@@ -39,7 +39,7 @@
                 {% if sent.count > 0 %}
                     <ul>
                     {% for s in sent %}
-                    <li>{{ s.id }} {{ s.receiver }} {{ s.msg_content }} {{ s.sent }}</li>
+                    <li>Wiadomość od: <span class="tagi">{{ s.receiver }}</span> Wysłano: <span class="tagi">{{ s.sent }}</span></li>
                     {% endfor %}
                     </ul>
                 {% else %}
@@ -56,6 +56,7 @@
                     </ul>
                 {% else %}
                     <p> Nie dodałeś żadnych atrakcji</p>
+                    <p><a href="{% url 'add-atrakcje' %}">Dodaj atrakcje</a></p>
                 {% endif %}
             {% endif %}
             <h2>Twoje animacje</h2>
@@ -68,9 +69,13 @@
                     </ul>
                 {% else %}
                     <p> Nie dodałeś żadnych atrakcji</p>
+                    <p><a href="{% url 'add-animacje' %}">Dodaj animacje</a></p>
                     </section>
                 {% endif %}
+                <section class="profil">
+                    <p><a href="{% url 'reset_password' user.id %}">Zmień hasło</a></p>
                     <p><a href="{% url 'userlogout' %}">Wyloguj się</a></p>
+                </section>
             {% endif %}        
     {% else %}
     <section class="profil">

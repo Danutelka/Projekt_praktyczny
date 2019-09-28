@@ -99,6 +99,12 @@ class NewsAddView(PermissionRequiredMixin, View):
             return TemplateResponse(request, 'blog-answer.html')
         return TemplateResponse(request, 'blog-add.html', context={'form': form})
 
+# class NewsEditView(PermissionRequiredMixin, UpdateView):
+#     permission_required ="auth.change_news"
+#     model = News
+#     field = __all__
+#     form = NewsEditForm
+
 #@login_required
 class NewsEditView(PermissionRequiredMixin, View):
     permission_required ="auth.change_news"
@@ -209,7 +215,9 @@ class AddAtrakcjeView(PermissionRequiredMixin, View):
         return TemplateResponse(request, 'add-atrakcje.html', context={'form':form})
     def post(self, request):
         form = AddAtractionForm(request.POST, request.FILES)
+        print(form)
         if form.is_valid():
+            print('form is valid')
             attr_name = form.cleaned_data['attr_name']
             address = form.cleaned_data['address']
             description = form.cleaned_data['description']
@@ -221,10 +229,18 @@ class AddAtrakcjeView(PermissionRequiredMixin, View):
             attr_duration = form.cleaned_data['attr_duration']
             attr_www = form.cleaned_data['attr_www']
             attr_wabik = form.cleaned_data['attr_wabik']
-            Attraction.objects.create(attr_name=attr_name, address=address, description=description,  \
-                rules=rules, attr_tag=attr_tag, attr_foto=attr_foto, attr_people=attr_people,  \
-                attr_price=attr_price, attr_duration=attr_duration, attr_www=attr_www, attr_wabik=attr_wabik)
-            return HttpResponseRedirect("atrakcje")
+            #user = form.cleaned_data['request.user.username']
+            attraction = Attraction.objects.create(attr_name=attr_name, address=address, description=description,  \
+                rules=rules, attr_people=attr_people, attr_price=attr_price,  \
+                attr_duration=attr_duration, attr_www=attr_www, user=user)
+            attraction.attr_tag.set(attr_tag)
+            attraction.attr_foto.set(attr_foto)
+            attraction.attr_wabik.set(attr_wabik)
+            attraction.user = request.user.username
+            attraction.save()
+            return TemplateResponse(request, 'attr-answer.html')
+        return TemplateResponse(request, 'add-atrakcje.html', context={'form':form})
+
 
 #@login_required
 class EditAtrakcje(PermissionRequiredMixin, View):
@@ -253,7 +269,8 @@ class EditAtrakcje(PermissionRequiredMixin, View):
             atr.attr_www = form.cleaned_data['attr_www']
             atr.attr_wabik = form.cleaned_data['attr_wabik']
             atr.save()
-            return HttpResponseRedirect("atrakcje")
+            return TemplateResponse(request, 'attr-answer.html')
+        return TemplateResponse(request, 'edit-atrakcje.html', ctx)
 
 
 class AnimacjeView(View):
@@ -388,9 +405,10 @@ class RegisterView(View):
             first_name = form.cleaned_data['first_name']
             last_name = form.cleaned_data['last_name']
             email = form.cleaned_data['email']
+            log_on = form.cleaned_data['log_on']
             if not User.objects.filter(username=username).exists():
                 if password == password_again:
-                    User.objects.create_user(username, password, first_name=first_name, last_name=last_name)
+                    User.objects.create_user(username, password, first_name=first_name, last_name=last_name, log_on=log_on)
                     return HttpResponseRedirect("index")
                 else:
                     error.append('Hasła są różne')

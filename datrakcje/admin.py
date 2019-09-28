@@ -7,7 +7,7 @@ from .models import Attraction, Animation, AttrTag, AnimTag, GeneralFoto, Wabik,
 # Register your models here.
 @admin.register(Attraction)
 class AttractionAdmin(admin.ModelAdmin):
-    exclude = ['attr_rating', 'created', 'votes'] 
+    exclude = ['attr_rating', 'created', 'votes', 'num_vote_up', 'num_vote_down', 'vote_score'] 
 
 @admin.register(Animation)
 class AnimationAdmin(admin.ModelAdmin):

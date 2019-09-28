@@ -19,9 +19,65 @@
     <div class="parallax-img d-flex align-items-center">
       <div class="container">
         <div class="row d-flex justify-content-center">
-          <form method="POST" enctype="multipart/form-data">
+          <form method="POST" action='/atrakcje/add' enctype="multipart/form-data">
           {% csrf_token %}
-          {{ form.as_p }}
+          {% comment %} {{ form.as_p }} {% endcomment %}
+          <div class="fieldWrapper">
+            <label for="{{ form.attr_name.id_for_label }}">Nazwa atrakcji</label>
+            {{ form.attr_name }}
+          </div>
+          <div class="fieldWrapper">
+            <label for="{{ form.address.id_for_label }}">Adres</label>
+            {{ form.address }}
+          </div>
+          <div class="fieldWrapper">
+            {{ form.attr_rating }}
+          </div>
+          <div class="fieldWrapper">
+            {{ form.created }}
+          </div>
+          <div class="fieldWrapper">
+            <label for="{{ form.description.id_for_label }}">Opis</label>
+            {{ form.description }}
+          </div>
+          <div class="fieldWrapper">
+            <label for="{{ form.rules.id_for_label }}">Zasady</label>
+            {{ form.rules }}
+          </div>
+          <div class="fieldWrapper">
+            {{ form.votes }}
+          </div>
+          <div class="fieldWrapper">
+            <label for="{{ form.attr_tags.id_for_label }}">Wybierz tagi</label>
+            {{ form.attr_tags }}
+          </div>
+          <div class="fieldWrapper">
+            <label for="{{ form.attr_foto.id_for_label }}">Wybierz zdjęcie</label>
+            {{ form.attr_foto }}
+          </div>
+          <div class="fieldWrapper">
+            <label for="{{ form.attr_people.id_for_label }}">Dla ilu osób</label>
+            {{ form.attr_people }}
+          </div>
+          <div class="fieldWrapper">
+            <label for="{{ form.attr_price.id_for_label }}">Cena</label>
+            {{ form.attr_price }}
+          </div>
+          <div class="fieldWrapper">
+            <label for="{{ form.attr_duration.id_for_label }}">Czas trwania</label>
+            {{ form.attr_duration }}
+          </div>
+          <div class="fieldWrapper">
+            <label for="{{ form.attr_www.id_for_label }}">WWW</label>
+            {{ form.attr_www }}
+          </div>
+          <div class="fieldWrapper">
+            <label for="{{ form.attr_wabik.id_for_label }}">Special</label>
+            {{ form.attr_wabik }}
+          </div>
+          <div class="fieldWrapper">
+            {{ form.user }}
+          </div>
           <div class="row d-flex justify-content-center">
           <input type="submit" class="btn-primary-add" value="Dodaj atrakcję">
           </div>

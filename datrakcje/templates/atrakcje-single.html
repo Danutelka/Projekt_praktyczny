@@ -137,8 +137,10 @@
 	    							<li><b>Czas trwania:</b> {{ attr_single.attr_duration }}</li>
 	    						</ul>
 	    						<ul class="ml-md-5">
-	    							<li>wiadomosc</li>
-	    							<li>zarezerwuj</li>
+									{% if request.user.is_authenticated %}
+	    								<li><a href ="{% url 'add-message' user.id %}">wiadomość</a></li>
+	    							{% comment %} <li>zarezerwuj</li> {% endcomment %}
+									{% endif %}
 	    							<li><b>Strona www:</b> <a href="">{{ attr_single.attr_www }}</a> </li>
 	    						</ul>
     						</div>
@@ -274,7 +276,7 @@
 		              </div>
 		            </div>
           		</div>
-<!---->	
+<!--
           		<div class="col-md-12 hotel-single ftco-animate mb-5 mt-5">
           			<h4 class="mb-4">Related Places</h4>
           			<div class="row">
@@ -348,7 +350,7 @@
 				    			</div>
           			</div>
           		</div>
-
+-->	
           	</div>
           </div> <!-- .col-md-8 -->
         </div>
