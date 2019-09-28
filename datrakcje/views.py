@@ -93,8 +93,11 @@ class NewsAddView(PermissionRequiredMixin, View):
             content = form.cleaned_data['content']
             foto = form.cleaned_data['foto']
             blog_tag = form.cleaned_data['blog_tag']
-            News.objects.create(title=title, content=content, foto=foto, blog_tag=blog_tag)
-            return HttpResponseRedirect('blog')
+            news = News.objects.create(title=title, content=content, foto=foto)
+            news.blog_tag.set(blog_tag)
+            news.save()
+            return TemplateResponse(request, 'blog-answer.html')
+        return TemplateResponse(request, 'blog-add.html', context={'form': form})
 
 #@login_required
 class NewsEditView(PermissionRequiredMixin, View):
@@ -356,16 +359,19 @@ class LoginView(View):
         return render(request, 'login.html', context={'form':form})
 
 class LogoutView(View):
-    def get(self, request, pk):
-        user = get_object_or_404(User, id=pk)
-        return TemplateResponse(request, 'logout.html', context={'user': user})
-    def post(self, request, pk):
-        user = get_object_or_404(User, id=pk)
-        if user is not None:
-            logout(request)
-            return HttpResponseRedirect('index')
-        else:
-            return TemplateResponse(request, 'logout.html', context={'user': user})
+    def get(self, request):
+        logout(request)
+        return TemplateResponse(request, 'wylogowano.html')
+    # def get(self, request, pk):
+    #     user = get_object_or_404(User, id=pk)
+    #     return TemplateResponse(request, 'logout.html', context={'user': user})
+    # def post(self, request, pk):
+    #     user = get_object_or_404(User, id=pk)
+    #     if user is not None:
+    #         logout(request)
+    #         return HttpResponseRedirect('index')
+    #     else:
+    #         return TemplateResponse(request, 'logout.html', context={'user': user})
         
 
 class RegisterView(View):

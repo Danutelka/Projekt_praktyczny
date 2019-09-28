@@ -120,7 +120,7 @@ class NewsletterForm(forms.Form):
 class NewsAddForm(forms.ModelForm):
         class Meta:
             model = News
-            exclude = ['user', 'posted_date']
+            exclude = ['user', 'posted_date', 'num_vote_up', 'num_vote_down', 'vote_score']
 
     # title = forms.CharField(max_length=250, label="wpisz tytuł posta")
     # content = forms.TextField(widget=forms.Textarea(), label="wpisz treść posta")

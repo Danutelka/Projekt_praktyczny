@@ -70,16 +70,14 @@
                     <p> Nie dodałeś żadnych atrakcji</p>
                     </section>
                 {% endif %}
-            {% endif %}
+                    <p><a href="{% url 'userlogout' %}">Wyloguj się</a></p>
+            {% endif %}        
     {% else %}
     <section class="profil">
         <h2>Użytkownik niezalogowany</h2>
         <p><a href="{% url 'login' %}">Zaloguj się</a></p>
     </section>
     {% endif %} 
-
-    {% comment %} <p>username: {{ user.username }}</p> {% endcomment %}
-
 
     {% comment %} <p><a href="{% url 'message/<int:pk1>' %}">Napisz wiadomość</a><p> {% endcomment %}
     {% comment %} <p><a href ="{% url 'logout' %}"> Wyloguj</a> </p> {% endcomment %}

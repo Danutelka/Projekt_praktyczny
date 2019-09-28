@@ -15,7 +15,7 @@ class AnimationAdmin(admin.ModelAdmin):
 
 @admin.register(News)
 class NewsAdmin(admin.ModelAdmin):
-    exclude = ['posted_date']
+    exclude = ['posted_date', 'num_vote_up', 'num_vote_down', 'vote_score']
 
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
